@@ -9,8 +9,7 @@ public:
         int val = nums.size() + 1;
         for(int i = 0; i < nums.size(); i++ )
             if(nums[i] != (i + 1)) {
-                val =  i+1;
-                break;
+                return i + 1;
             }
         return val;
     }
