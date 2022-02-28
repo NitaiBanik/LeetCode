@@ -11,50 +11,36 @@
  */
 class Solution {
 public:
-    int widthOfBinaryTree(TreeNode* root) {
+    int getMaxWidth(TreeNode* root){
         
-        queue<TreeNode*> Q;
+        queue<pair<TreeNode*, unsigned long long>>Q;   
+        Q.push({root, 1});
         
-        Q.push(root);
-        
-        map<TreeNode*, unsigned long long> level;   
-        map<TreeNode*, unsigned long long> nodeValue;
-
-        map<unsigned long long, unsigned long long> firstIndex;
-        
-        level[root] = 0;     
-        nodeValue[root] = 0;
-        
-        unsigned long long maxWidth = 0;
+        unsigned long long maxNodes = 0;
         
         while(!Q.empty()){
+            unsigned long long leftNodeNumber = Q.front().second;
+            unsigned long long rightNodeNumber = leftNodeNumber;
             
-            TreeNode* parent = Q.front();
-            Q.pop();
+            int sz = Q.size();
             
-            if(parent == NULL) continue;
-            
-            unsigned long long parentLevel = level[parent];
-            unsigned long long nodeNumber = nodeValue[parent];
-            
-            if(firstIndex.find(parentLevel) == firstIndex.end()){
-                firstIndex[parentLevel] = nodeNumber;
+            for(int i = 0; i < sz; i++){
+                TreeNode* parent = Q.front().first;
+                rightNodeNumber = Q.front().second;
+                Q.pop();
+                
+                if(parent->left) Q.push({parent->left, rightNodeNumber * 2});
+                if(parent->right) Q.push({parent->right, rightNodeNumber * 2 + 1});
             }
             
-            maxWidth = max(maxWidth, nodeNumber - firstIndex[parentLevel] + 1);    
-           
-            if(parent->left != NULL){
-                Q.push(parent->left);
-                level[parent->left] = parentLevel + 1;
-                nodeValue[parent->left] = nodeNumber * 2;
-            }
-            
-            if(parent->right != NULL){
-                Q.push(parent->right);
-                level[parent->right] = parentLevel + 1;
-                nodeValue[parent->right] = nodeNumber * 2 + 1;
-            }
+            maxNodes = max(maxNodes, rightNodeNumber - leftNodeNumber + 1);
         }
-        return maxWidth;
+        
+        return maxNodes;
+    }
+    int widthOfBinaryTree(TreeNode* root) {
+        if(!root) return 0;
+        
+        return getMaxWidth(root);
     }
 };
