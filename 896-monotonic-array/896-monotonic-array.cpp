@@ -17,7 +17,6 @@ public:
     }
     
     bool isMonotonic(vector<int>& nums) {
-        if(nums.size() == 1) return true;
         
         bool answer = false;
         answer |= isIncreasing(nums);
