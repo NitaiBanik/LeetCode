@@ -11,23 +11,50 @@
  */
 class Solution {
 public:
-    
-    unsigned long long maxWidth = 0;
-    map<int, unsigned long long> firstIndex;
-    
-    void dfs(TreeNode* root, int level, unsigned long long nodeNumber){
-        if(root == NULL) return;
-        
-        if(firstIndex.find(level) == firstIndex.end())
-            firstIndex[level] = nodeNumber;
-        
-        maxWidth = max(maxWidth, nodeNumber - firstIndex[level] + 1);
-        
-        dfs(root->left, level + 1, nodeNumber * 2);
-        dfs(root->right, level + 1, nodeNumber * 2 + 1);
-    }
     int widthOfBinaryTree(TreeNode* root) {
-        dfs(root, 0, 0);
+        
+        queue<TreeNode*> Q;
+        
+        Q.push(root);
+        
+        map<TreeNode*, unsigned long long> level;   
+        map<TreeNode*, unsigned long long> nodeValue;
+
+        map<unsigned long long, unsigned long long> firstIndex;
+        
+        level[root] = 0;     
+        nodeValue[root] = 0;
+        
+        unsigned long long maxWidth = 0;
+        
+        while(!Q.empty()){
+            
+            TreeNode* parent = Q.front();
+            Q.pop();
+            
+            if(parent == NULL) continue;
+            
+            unsigned long long parentLevel = level[parent];
+            unsigned long long nodeNumber = nodeValue[parent];
+            
+            if(firstIndex.find(parentLevel) == firstIndex.end()){
+                firstIndex[parentLevel] = nodeNumber;
+            }
+            
+            maxWidth = max(maxWidth, nodeNumber - firstIndex[parentLevel] + 1);    
+           
+            if(parent->left != NULL){
+                Q.push(parent->left);
+                level[parent->left] = parentLevel + 1;
+                nodeValue[parent->left] = nodeNumber * 2;
+            }
+            
+            if(parent->right != NULL){
+                Q.push(parent->right);
+                level[parent->right] = parentLevel + 1;
+                nodeValue[parent->right] = nodeNumber * 2 + 1;
+            }
+        }
         return maxWidth;
     }
 };
