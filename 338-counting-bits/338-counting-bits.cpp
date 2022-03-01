@@ -8,10 +8,16 @@ public:
         
         vector<int>Ones(n + 1, 0);
         
-        Ones[0] = 0;
+        /* Ones[0] = 0;
         for(int number = 1 ; number <= n; number++){
            if(number%2 == 0) Ones[number] = Ones[number/2];
            else Ones[number] = Ones[number - 1] + 1;
+        } */
+        
+        Ones[0] = 0;
+        for(int number = 1 ; number <= n; number++){
+           if(number&1) Ones[number] = Ones[number - 1] + 1;
+           else Ones[number] = Ones[number / 2];
         }
         
         return Ones;
