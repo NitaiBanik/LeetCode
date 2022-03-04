@@ -5,12 +5,16 @@ public:
         if(haystack.size() == 0 || (haystack.size() < needle.size())) return -1;
         
         for(int i = 0; i <= haystack.size() - needle.size(); i++){
+            
+            int found = true;
             for(int j = 0 ; j < needle.size(); j++){
                 if(haystack[i + j] != needle[j]){
+                      found = false;
                     break;
                 }
-                if(j == (needle.size()-1)) return i;
             }
+            
+            if(found) return i;
             
         }
         
