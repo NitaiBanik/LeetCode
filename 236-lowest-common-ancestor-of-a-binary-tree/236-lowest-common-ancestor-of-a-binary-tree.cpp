@@ -37,7 +37,7 @@ public:
         
         if(p == q) return valueToNode[p];
         
-        while(par[p] != par[q] && p != par[q] && q != par[p]){
+        while(par[p] != par[q]){
             p = par[p], q = par[q];
         }
         
