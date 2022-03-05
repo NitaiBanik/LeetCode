@@ -11,24 +11,26 @@ class Solution {
 public:
     map<int, int> level, par;
     map<int, TreeNode*> valueToNode;
-    void dfs(TreeNode* root, int lvl, int parent){
+    void dfs(TreeNode* root, int parent){
         if(!root) return;
         
         int value = root->val;
         par[value] = parent;
-        level[value] = lvl;
+        level[value] = level[parent] + 1;
         
         valueToNode[root->val] = root;
         
-        dfs(root->left, lvl + 1, root->val);
-        dfs(root->right, lvl + 1, root->val);
+        dfs(root->left, root->val);
+        dfs(root->right, root->val);
     }
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* pp, TreeNode* qq) {
         
         int p = pp->val, q = qq->val;
+        
+        level[root->val] = 0;
        
-        dfs(root, 0, -1);
+        dfs(root, -1);
         if(level[p] > level[q]) swap(p, q);
         
         while(level[p] != level[q]){
