@@ -12,10 +12,12 @@ public:
         
         ListNode* slow = head;
         ListNode* fast = head;
+        int max = 999999;
         
-        while(fast && fast->next){
-            slow = slow->next, fast = fast->next->next;
-            if(fast == slow) return true;
+        while(slow){
+            slow = slow->next;
+            if(slow && slow->val == max) return true;
+            if(slow)slow->val = max;
         }
         return false;
     }
