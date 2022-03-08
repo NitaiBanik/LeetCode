@@ -1,16 +1,23 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
+        int size = matrix.size();
+        for(int i = 0; i < size; i++){
+            for(int j = i ; j < size; j++)
+                swap(matrix[i][j], matrix[j][i]);
+        }
         
-        vector<vector<int>> answer(matrix.size());
-        
-        for(int col  = 0; col < matrix.size(); col++){
-            for(int row = matrix.size() -1 ; row >= 0; row--){
-                answer[col].push_back(matrix[row][col]);
-            cout<<matrix[row][col]<< " ";}
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++)
+                cout<<matrix[i][j]<<" ";
             cout<<endl;
         }
         
-        matrix = answer;
+        
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size/2; j++)
+                 swap(matrix[i][j], matrix[i][size - j - 1]);
+        }
+        
     }
 };
