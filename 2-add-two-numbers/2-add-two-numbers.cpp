@@ -24,7 +24,7 @@ public:
             if(l2) value2 = l2->val, l2 = l2->next;
             
             int sum = value1 + value2 + inHand;
-            inHand = sum/10;
+            inHand = (sum > 9) ? 1 : 0;
             sum %= 10;
             
             ListNode* node = new ListNode(sum);
