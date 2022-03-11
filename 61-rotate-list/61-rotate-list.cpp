@@ -21,13 +21,12 @@ public:
     }
     
     ListNode* rotateRight(ListNode* head, int k) {
-        if(!head || !head->next) return head;
-        int size = getSize(head);
+        if(!head) return head;
         
+        int size = getSize(head);   
         int position = k == 0 ? 0: (k % size);
         
-        if(!position) return head;
-        
+        if(!position) return head;        
         position = size - position;
         
         ListNode* savedHead = head;
