@@ -16,13 +16,10 @@ public:
 
 class Solution {
 public:
-    Node* copyRandomList(Node* head) {
-        
+    Node* createNewListWithoutRandom(Node * head, unordered_map<Node*, Node*>& mp){
         Node* dummy = new Node(-1);
-        Node* savedDummy = dummy;
         
-        unordered_map<Node*, Node*> mp;     
-        Node* savedOrginalHead = head;
+        Node* savedDummy = dummy;
         while(head){
             Node* temp = new Node(head->val);
             dummy->next = temp;
@@ -30,17 +27,27 @@ public:
             mp[head] = dummy;
             head = head->next;
         }
-        
-        head = savedOrginalHead;
-        while(head){
-            Node* nodeFromNewList = mp[head];
+        return savedDummy->next;
+    }
+    void addRadomNodeInNewList(Node* headOfOldList, unordered_map<Node*, Node*>& mp){
+        while(headOfOldList){
+            Node* nodeFromNewList = mp[headOfOldList];
             
-            Node* randomFromNewList = mp[head->random];
+            Node* randomFromNewList = mp[headOfOldList->random];
             nodeFromNewList->random = randomFromNewList;
             
-            head = head->next;
+            headOfOldList = headOfOldList->next;
             
         }
-        return savedDummy->next;
+    }
+    
+    Node* copyRandomList(Node* head) {
+        
+        unordered_map<Node*, Node*> mp;
+        
+        Node* headOfNewList = createNewListWithoutRandom(head, mp);      
+        addRadomNodeInNewList(head, mp);
+        
+        return headOfNewList;
     }     
 };
