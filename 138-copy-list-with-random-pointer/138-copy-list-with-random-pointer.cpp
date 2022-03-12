@@ -30,14 +30,13 @@ public:
         return savedDummy->next;
     }
     void addRadomNodeInNewList(Node* headOfOldList, unordered_map<Node*, Node*>& mp){
+        
         while(headOfOldList){
+            
             Node* nodeFromNewList = mp[headOfOldList];
+            nodeFromNewList->random = mp[headOfOldList->random];
             
-            Node* randomFromNewList = mp[headOfOldList->random];
-            nodeFromNewList->random = randomFromNewList;
-            
-            headOfOldList = headOfOldList->next;
-            
+            headOfOldList = headOfOldList->next;     
         }
     }
     
