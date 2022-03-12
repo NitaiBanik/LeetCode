@@ -20,34 +20,24 @@ public:
         
         Node* dummy = new Node(-1);
         Node* savedDummy = dummy;
-
+        
+        map<Node*, Node*> mp;     
         Node* savedOrginalHead = head;
         while(head){
             Node* temp = new Node(head->val);
             dummy->next = temp;
             dummy = dummy->next;
+            mp[head] = dummy;
             head = head->next;
         }
         
         head = savedOrginalHead;
-        dummy = savedDummy->next;
         while(head){
-            Node* curr = savedOrginalHead;
-            int cn = 1;
+            Node* nodeFromNewList = mp[head];
             
-            while(curr != head-> random){
-                cn++;
-                curr = curr->next;
-            }
+            Node* randomFromNewList = mp[head->random];
+            nodeFromNewList->random = randomFromNewList;
             
-            curr = savedDummy->next;
-            int nodeCount = 1;
-            while(nodeCount != cn){
-                nodeCount++;
-                curr = curr->next;
-            }
-            dummy->random = curr;
-            dummy = dummy->next;
             head = head->next;
             
         }
