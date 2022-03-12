@@ -21,7 +21,7 @@ public:
         Node* dummy = new Node(-1);
         Node* savedDummy = dummy;
         
-        map<Node*, Node*> mp;     
+        unordered_map<Node*, Node*> mp;     
         Node* savedOrginalHead = head;
         while(head){
             Node* temp = new Node(head->val);
