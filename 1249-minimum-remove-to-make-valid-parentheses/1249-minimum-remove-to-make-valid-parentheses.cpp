@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool isAlpha(char ch){
+    bool isAlpha(char& ch){
         return ch >= 'a' && ch <= 'z';
     }
     string minRemoveToMakeValid(string s) {
