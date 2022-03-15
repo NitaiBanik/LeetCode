@@ -1,6 +1,5 @@
 class Solution {
 public:
-    int toInt(char ch){ return ch-'0'; }
     
     void solve(int pos, long total, long previousValue, long currentNum, string currentString, int& target, string& num, string expression, vector<string>& expressions){
         
@@ -10,7 +9,7 @@ public:
             return;
         }
         
-        long currentValue = currentNum * 10 + toInt(num[pos]);
+        long currentValue = currentNum * 10 + (num[pos] - '0');
         if(currentValue > 0){
             solve(pos + 1, total, previousValue, currentValue,currentString+num[pos], target, num, expression, expressions);
         }
