@@ -23,9 +23,9 @@ public:
             }
         }
         
-        string ans = "";
+        int index = 0;
         for(int i = 0; i < s.size(); i++)
-            if(s[i] != '!') ans+=s[i];
-        return ans;
+            if(s[i] != '!') s[index++] = s[i];
+        return s.erase(index);
     }
 };
