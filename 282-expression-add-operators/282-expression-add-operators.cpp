@@ -2,7 +2,7 @@ class Solution {
 public:
     int toInt(char ch){ return ch-'0'; }
     
-    void solve(int pos, long total, long previousValue, long currentNum, int& target, string& num, string expression, vector<string>& expressions){
+    void solve(int pos, long total, long previousValue, long currentNum, string currentString, int& target, string& num, string expression, vector<string>& expressions){
         
         if(pos == num.size()){
             //cout<<expression<<endl;
@@ -11,18 +11,17 @@ public:
         }
         
         long currentValue = currentNum * 10 + toInt(num[pos]);
-        string currentString = to_string(currentValue);
         if(currentValue > 0){
-            solve(pos + 1, total, previousValue, currentValue, target, num, expression, expressions);
+            solve(pos + 1, total, previousValue, currentValue,currentString+num[pos], target, num, expression, expressions);
         }
         
         if(expression == ""){
-            solve(pos + 1, total+currentValue, currentValue, 0, target, num, expression+currentString, expressions);
+            solve(pos + 1, total+currentValue, currentValue, 0, "", target, num, expression+currentString + num[pos], expressions);
         }
         else{ 
-            solve(pos + 1, total + currentValue, currentValue, 0, target, num, expression+'+'+currentString, expressions);
-            solve(pos + 1, total - currentValue, -currentValue,0, target, num, expression+'-'+currentString , expressions);
-            solve(pos + 1, total - previousValue + previousValue * currentValue, previousValue*currentValue,0, target, num, expression+'*'+currentString , expressions);
+            solve(pos + 1, total + currentValue, currentValue, 0, "", target, num, expression+'+'+currentString + num[pos], expressions);
+            solve(pos + 1, total - currentValue, -currentValue,0, "", target, num, expression+'-'+currentString + num[pos] , expressions);
+            solve(pos + 1, total - previousValue + previousValue * currentValue, previousValue*currentValue,0, "",target, num, expression+'*'+currentString + num[pos] , expressions);
         }   
         
     }
@@ -31,7 +30,7 @@ public:
         
         vector<string> expressions;
         
-        solve(0, 0, 0, 0, target, num, "", expressions);
+        solve(0, 0, 0, 0, "", target, num, "", expressions);
         
         return expressions;
     }
