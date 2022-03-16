@@ -3,12 +3,13 @@ public:
     int countPrimes(int n) {
         vector<int> isPrime(n + 1, true);
         
-        for(int i = 4; i <= n; i+=2) isPrime[i] = false;
+        for(int i = 4; i < n; i+=2) isPrime[i] = false;
         
         int sq = sqrt(n);
         
-        for(int i = 3; i <= sq; i++){
-            for(int j = i * i; j <= n; j+=(2 * i))
+        for(int i = 3; i <= sq; i+=2){
+            if(isPrime[i])
+            for(int j = i * i; j < n; j+=(2 * i))
                 isPrime[j] = false;
         }
         
