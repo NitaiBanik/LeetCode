@@ -13,7 +13,6 @@ public:
             pushIdx++;
         }
         
-        return popIdx == popped.size();
-        
+        return pushIdx == 0;  
     }
 };
