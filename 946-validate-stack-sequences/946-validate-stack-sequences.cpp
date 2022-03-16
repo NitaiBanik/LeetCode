@@ -10,10 +10,6 @@ public:
              start++;
          }   
         }
-         while(!st.empty() && st.top() == popped[start]){
-             st.pop();
-             start++;
-         } 
         
         return start == popped.size();
         
