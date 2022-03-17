@@ -1,20 +1,18 @@
 class Solution {
 public:
     int scoreOfParentheses(string s) {
+        char previousCharacter;
+        int ans = 0;
+        int bracket = 0;
         
-        stack<int> st;
-        st.push(0);
         for(auto chr: s){
-            if(chr == '(') st.push(0);
+            if(chr == '(') bracket++;
             else{
-                int currValue = st.top();
-                st.pop();
-                int prevValue = st.top();
-                st.pop();
-                st.push(prevValue + max(2 * currValue, 1));
+                bracket--;
+                if(previousCharacter == '(') ans += (1 << bracket);
             }
+            previousCharacter = chr;
         }
-        return st.top();
-        
+        return ans;
     }
 };
