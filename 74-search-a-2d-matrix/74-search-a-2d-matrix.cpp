@@ -3,8 +3,8 @@ public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         for(int i = 0; i < matrix.size(); i++)
         {
-            int index = lower_bound(matrix[i].begin(), matrix[i].end(), target) - matrix[i].begin();
-            if(index < matrix[i].size() && matrix[i][index] == target)
+            int index = binary_search(matrix[i].begin(), matrix[i].end(), target);
+            if(index)
                 return true;
         }
         return false;
