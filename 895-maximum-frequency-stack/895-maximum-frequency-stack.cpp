@@ -1,8 +1,8 @@
 class FreqStack {
 public:
     int maxFrequency;
-    map<int, int>frequency;
-    map<int, stack<int>> frequency_stack;
+    unordered_map<int, int>frequency;
+    unordered_map<int, stack<int>> frequency_stack;
     FreqStack() {
        maxFrequency = 0;
        frequency.clear();
