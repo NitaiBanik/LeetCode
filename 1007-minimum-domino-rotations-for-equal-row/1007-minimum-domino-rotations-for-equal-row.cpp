@@ -18,7 +18,7 @@ public:
             if(tops[i] != up) x++;
              if(bottoms[i] != down) y++;
         }
-        swap(up, down);
+        
         int mn = 999999;
         
         mn =  min(x,y);
@@ -26,8 +26,8 @@ public:
         x = 0, y = 0;
         
         for(int i = 0; i < tops.size(); i++){
-            if(tops[i] != up) x++;
-             if(bottoms[i] != down) y++;
+            if(bottoms[i] != up) x++;
+             if(tops[i] != down) y++;
         }
         
          mn =  min(mn, min(x,y));
