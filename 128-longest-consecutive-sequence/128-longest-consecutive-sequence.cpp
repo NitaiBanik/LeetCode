@@ -1,10 +1,10 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-       set<int>st;
+       unordered_map<int, bool>st;
         
         int ans = 0;
-        for(auto num: nums) st.insert(num);
+        for(auto num: nums) st[num] = true;
         for(auto num: nums){
             if(st.find(num-1) == st.end()){
                 int cnt = 1;
