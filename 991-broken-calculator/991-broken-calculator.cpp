@@ -3,22 +3,15 @@ public:
     int brokenCalc(int startValue, int target) {
         
         int numberOfSteps = 0;
-        
-        while(startValue != target){
+        while(target > startValue){
             
-            if(target%2 == 0 && startValue < target){
-                numberOfSteps++;
-                target/=2;
-            }
-            else if(target < startValue)
-                return numberOfSteps + (startValue -  target);
-            else {
-                target++;
-                numberOfSteps++;
-            }
+            if(target%2) target++;
+            else target /= 2;
             
+            numberOfSteps++;
         }
-        return numberOfSteps;
+        
+        return numberOfSteps + (startValue - target);
         
     }
 };
