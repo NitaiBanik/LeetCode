@@ -3,11 +3,11 @@ public:
    
     int twoCitySchedCost(vector<vector<int>>& costs) {
         
-      priority_queue<pair<int,int>>pq;
+      priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
       int n = costs.size(), sum = 0;
         
         for(int i = 0; i < n; i++){
-            pq.push({-(costs[i][0] - costs[i][1]),i});
+            pq.push({(costs[i][0] - costs[i][1]),i});
         }
         
         n /= 2;
