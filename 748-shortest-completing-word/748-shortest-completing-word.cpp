@@ -5,8 +5,9 @@ public:
         for(int i = 0; i < totalChars; i++){
             if(vec[i] > vec1[i]){
                 isOk = false;
-                break;
+               // break;
             }
+            vec1[i] = 0;
         }
         return isOk;
     }
@@ -46,7 +47,7 @@ public:
                 ans = word;
             }
             
-            resetFrequency(vec1, totalChars);
+           // resetFrequency(vec1, totalChars);
         }
         
         return ans;
