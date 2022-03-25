@@ -17,23 +17,24 @@ public:
         if(ch >= 'A' && ch <= 'Z') frequency[ch - 'A']++;
     }
     
+    void calculateFrequency(vector<int>&vec, string str){
+        for(auto chr: str){
+            increaseFrequency(vec, chr);
+        }
+    }
+    
     string shortestCompletingWord(string licensePlate, vector<string>& words) {
         
         vector<int>vec(26, 0);
         
-        for(auto chr: licensePlate){
-            increaseFrequency(vec, chr);
-        }
+       calculateFrequency(vec, licensePlate);
         
         int mn = 1001;
         string ans = "";
         
         for(auto word: words){
             vector<int>vec1(26, 0);
-            
-            for(auto ch: word){
-                increaseFrequency(vec1, ch);
-            }
+            calculateFrequency(vec1, word);
             
             bool isComplet = isComplete(vec, vec1);
             
