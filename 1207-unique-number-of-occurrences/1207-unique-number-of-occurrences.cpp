@@ -13,7 +13,7 @@ public:
         for(int i = 0; i < 2000; i++){
             if(freq[i] > 0){
                 occur[freq[i]]++;
-                if(occur[freq[i]] > 1) isOk = false;
+                if(occur[freq[i]] > 1) return false;
             }
         }
         
