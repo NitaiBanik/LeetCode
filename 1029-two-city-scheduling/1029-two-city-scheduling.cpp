@@ -1,9 +1,15 @@
+class comp{
+    public:
+    bool operator()(pair<int, int>& a, pair<int, int>&b){
+       return a.first > b.first;
+   }
+};
 class Solution {
 public:
    
     int twoCitySchedCost(vector<vector<int>>& costs) {
         
-      priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
+      priority_queue<pair<int,int>, vector<pair<int,int>>, comp>pq;
       int n = costs.size(), sum = 0;
         
         for(int i = 0; i < n; i++){
