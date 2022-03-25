@@ -1,18 +1,19 @@
 class Solution {
 public:
-    bool isComplete(vector<int>& vec, vector<int>& vec1){
+    bool isComplete(vector<int>& vec, vector<int>& vec1, int totalChars){
         bool isOk = true;
-        for(int i = 0; i < 26; i++){
+        for(int i = 0; i < totalChars; i++){
             if(vec[i] > vec1[i]){
                 isOk = false;
                 break;
             }
-            
-            vec1[i] = 0;
         }
-        for(int i = 0; i < 26; i++)
-            vec1[i] = 0;
         return isOk;
+    }
+    
+    void resetFrequency(vector<int>& vec, int totalChars){
+        for(int i = 0; i < totalChars; i++)
+            vec[i] = 0;
     }
                      
     void increaseFrequency(vector<int>& frequency, char ch){
@@ -27,10 +28,10 @@ public:
     }
     
     string shortestCompletingWord(string licensePlate, vector<string>& words) {
+        int totalChars = 26;
+        vector<int>vec(totalChars, 0), vec1(totalChars, 0);
         
-       vector<int>vec(26, 0), vec1(26, 0);
-        
-       calculateFrequency(vec, licensePlate);
+        calculateFrequency(vec, licensePlate);
         
         int mn = 1001;
         string ans = "";
@@ -38,12 +39,14 @@ public:
         for(auto word: words){
             calculateFrequency(vec1, word);
             
-            bool isComplet = isComplete(vec, vec1);
+            bool isComplet = isComplete(vec, vec1, totalChars);
             
             if(isComplet && (word.size() < mn)){
                 mn = word.size();
                 ans = word;
             }
+            
+            resetFrequency(vec1, totalChars);
         }
         
         return ans;
