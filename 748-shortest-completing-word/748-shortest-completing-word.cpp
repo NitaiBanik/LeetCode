@@ -7,8 +7,11 @@ public:
                 isOk = false;
                 break;
             }
+            
+            vec1[i] = 0;
         }
-        
+        for(int i = 0; i < 26; i++)
+            vec1[i] = 0;
         return isOk;
     }
                      
@@ -25,7 +28,8 @@ public:
     
     string shortestCompletingWord(string licensePlate, vector<string>& words) {
         
-        vector<int>vec(26, 0);
+       vector<int>vec(26, 0);
+       vector<int>vec1(26, 0);
         
        calculateFrequency(vec, licensePlate);
         
@@ -33,7 +37,6 @@ public:
         string ans = "";
         
         for(auto word: words){
-            vector<int>vec1(26, 0);
             calculateFrequency(vec1, word);
             
             bool isComplet = isComplete(vec, vec1);
