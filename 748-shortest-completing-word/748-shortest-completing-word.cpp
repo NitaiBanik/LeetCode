@@ -28,8 +28,7 @@ public:
     
     string shortestCompletingWord(string licensePlate, vector<string>& words) {
         
-       vector<int>vec(26, 0);
-       vector<int>vec1(26, 0);
+       vector<int>vec(26, 0), vec1(26, 0);
         
        calculateFrequency(vec, licensePlate);
         
