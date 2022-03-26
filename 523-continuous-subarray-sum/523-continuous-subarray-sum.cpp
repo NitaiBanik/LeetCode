@@ -8,7 +8,7 @@ public:
         
         for(int i = 0; i < nums.size(); i++){
             sum += nums[i];
-            if(k != 0)sum %= k;
+            if(k)sum %= k;
             
             if(mp.find(sum) != mp.end()){
                 if(i - mp[sum] > 1){ cout<<sum<<endl;
