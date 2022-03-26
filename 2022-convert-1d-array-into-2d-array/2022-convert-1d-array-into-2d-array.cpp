@@ -9,7 +9,7 @@ public:
         
         for(int i = 0; i < original.size(); i++){
             vec[row][col++] = original[i];
-                   if(col == n) row++, col = 0;
+            if(col == n) row++, col = 0;
         }
         
         return vec;
