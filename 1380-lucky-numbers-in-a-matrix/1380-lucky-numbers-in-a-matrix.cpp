@@ -12,19 +12,14 @@ public:
         return col;
     }
     
-    int getMaxRow(vector<vector<int>>& matrix,int col){
+    int getMaxValueFromRows(vector<vector<int>>& matrix,int col){
         
-        int mx = -1, row = -1;
+        int mx = -1;
         
-        for(int i = 0; i < matrix.size(); i++){
-            
-            if(matrix[i][col] > mx){
-                mx = matrix[i][col];
-                row = i;
-            }
-        }
+        for(int i = 0; i < matrix.size(); i++)
+            mx = max(mx, matrix[i][col]);
         
-        return row;
+        return mx;
     }
     
     vector<int> luckyNumbers (vector<vector<int>>& matrix) { 
@@ -32,10 +27,10 @@ public:
         vector<int> ans;
         for(int i = 0; i < matrix.size(); i++){
             int col = getMinCol(matrix[i]);
-            int row = getMaxRow(matrix, col);
+            int max = getMaxValueFromRows(matrix, col);
             
-            if(matrix[i][col] == matrix[row][col])
-                ans.push_back(matrix[i][col]);
+            if(matrix[i][col] == max)
+                ans.push_back(max);
         }
         
         return ans;
