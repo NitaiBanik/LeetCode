@@ -7,7 +7,7 @@ public:
             return;
         }
         
-        for(int i = pos; i <= n; i++){
+        for(int i = pos; i <= (n - k + current.size() + 1); i++){
             current.push_back(i);
             backTrack(i + 1, n, k, current, ans);
             current.pop_back();
