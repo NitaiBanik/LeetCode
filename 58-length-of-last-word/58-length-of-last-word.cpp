@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool isAlpah(char ch){
+    bool isAlpah(char& ch){
         if(ch >= 'a' & ch <= 'z') return true;
         if(ch >= 'A' & ch <= 'Z') return true;
         else return false;
