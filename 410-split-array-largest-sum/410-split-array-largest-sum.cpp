@@ -1,7 +1,5 @@
 class Solution {
 public:
-    int dp[1002][1002];
-    
     int fun(vector<int>& nums, vector<vector<int>>& dp, int pos, int remain){
         if(pos == nums.size()-1){
             if(remain == 0) return 0;
