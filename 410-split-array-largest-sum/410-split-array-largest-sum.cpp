@@ -15,7 +15,7 @@ public:
         
         int mn = INT_MAX;
         
-        for(int i = pos + 1; i < nums.size(); i++){
+        for(int i = pos + 1; i < nums.size() - remain + 1; i++){
             int mx = max(nums[i] - nums[pos], fun(nums, dp, i, remain-1));
             mn = min(mn, mx);
         }
