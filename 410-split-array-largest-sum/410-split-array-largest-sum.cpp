@@ -20,19 +20,22 @@ public:
         
         return dp[pos][remain] = mn;
     }
-    int splitArray(vector<int>& nums, int m) {
-        nums.push_back(0);
-        
-        vector<vector<int>>dp(nums.size(), vector<int>(m + 1, -1));
-        
+    void calculatePrefixSum(vector<int> & nums){
         for(int i = nums.size() - 1; i >= 1; i--)
             nums[i] = nums[i-1];
         
         nums[0] = 0;
-        
             
        for(int i = 1; i < nums.size(); i++)
            nums[i] += nums[i-1];
+    }
+    
+    int splitArray(vector<int>& nums, int m) {
+        nums.push_back(0);
+        
+        calculatePrefixSum(nums);
+        
+        vector<vector<int>>dp(nums.size(), vector<int>(m + 1, -1));
         
         return fun(nums, dp, 0, m);
     }
