@@ -1,5 +1,8 @@
 class Solution {
 public:
+    bool isvalidIndex(int index, vector<int>& nums, int val){
+        return index >= 0 && index < nums.size() && nums[index] == val;
+    }
     vector<vector<int>> threeSum(vector<int>& nums) {
         
         if(nums.size() < 3) return {};
@@ -20,10 +23,10 @@ public:
                     setOfAnswer.push_back({nums[i], nums[start], nums[end]});
                     
                     int l = nums[start], r = nums[end];
-                    while((start + 1 < nums.size()) && (nums[start + 1] == l))
+                    while(isvalidIndex(start + 1, nums, l))
                         start++;
                     
-                     while((end - 1 >= 0) && (nums[end - 1] == r))
+                     while(isvalidIndex(end -1, nums, r))
                          end--;
                     
                     start++, end--;
@@ -34,7 +37,7 @@ public:
             }
             
             int val = nums[i];
-            while((i + 1 < nums.size()) && (val == nums[i + 1]))
+            while(isvalidIndex(i + 1, nums, val))
                 i++;
         }
         
