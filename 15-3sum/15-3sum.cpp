@@ -20,11 +20,13 @@ public:
                     setOfAnswer.push_back({nums[i], nums[start], nums[end]});
                     
                     int l = nums[start], r = nums[end];
-                    while((nums[start] == l) && start < end)
+                    while((start + 1 < nums.size()) && (nums[start + 1] == l) && (start < end))
                         start++;
                     
-                     while((nums[end] == r) && start < end)
+                     while((end - 1 >= 0) && (nums[end - 1] == r) && (start < end))
                          end--;
+                    
+                    start++, end--;
                 }
                 
                 else if(currentSum > need) end--;
