@@ -19,7 +19,7 @@ public:
                     setOfAnswer.insert({nums[i], nums[start], nums[end]});
                     start++, end--;
                 }
-                else if(currentSum > need) end --;
+                else if(currentSum > need) end--;
                 else start++;
             }
         }
