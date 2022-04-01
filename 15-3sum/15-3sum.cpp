@@ -20,10 +20,10 @@ public:
                     setOfAnswer.push_back({nums[i], nums[start], nums[end]});
                     
                     int l = nums[start], r = nums[end];
-                    while((start + 1 < nums.size()) && (nums[start + 1] == l) && (start < end))
+                    while((start + 1 < nums.size()) && (nums[start + 1] == l))
                         start++;
                     
-                     while((end - 1 >= 0) && (nums[end - 1] == r) && (start < end))
+                     while((end - 1 >= 0) && (nums[end - 1] == r))
                          end--;
                     
                     start++, end--;
