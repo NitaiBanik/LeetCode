@@ -4,7 +4,7 @@ public:
         string s = num;
         int swap_count = 0;
         while(k--){
-            num = nextPermutation(num);
+           nextPermutation(num);
         }
         for(int i = 0 ; i < s.size(); i++){
             int j = i + 1;
@@ -16,9 +16,9 @@ public:
         return swap_count;
     }
     
-    string nextPermutation(string& nums) {
+    void nextPermutation(string& nums) {
         
-        if(nums.size() < 2) return nums;
+        if(nums.size() < 2) return;
         
         int lf = -1;
         int rt = nums.size() - 1;
@@ -41,7 +41,5 @@ public:
             }
             swap(nums[lf], nums[rt]);
         }
-        
-        return nums;
     }
 };
