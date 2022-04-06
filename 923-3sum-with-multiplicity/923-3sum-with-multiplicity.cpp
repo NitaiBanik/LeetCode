@@ -9,18 +9,19 @@ public:
             vec[val]++;
         long long ans = 0;
         
-        for(int i = 0; i < arr.size(); i++){
+        for(int i = 0; i < arr.size() - 2; i++){
             vec[arr[i]]--;
-            for(int j = i + 1; j < arr.size(); j++){
+            for(int j = i + 1; j < arr.size() -1; j++){
                 vec[arr[j]]--;
                 
                 int need = target - (arr[i] + arr[j]);
                 if(need < 0) continue;
                 ans += vec[need];
+                if(ans >= mod)
                 ans %= mod;
             }
             
-            for(int j = i + 1; j < arr.size(); j++)
+            for(int j = i + 1; j < arr.size() -1; j++)
                 vec[arr[j]]++;
         }
         return ans;
