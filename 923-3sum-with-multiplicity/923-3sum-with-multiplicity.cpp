@@ -1,7 +1,7 @@
 class Solution {
 public:
     int threeSumMulti(vector<int>& arr, int target) {
-        
+        sort(arr.begin(), arr.end());
         int mod = 1000000000 + 7;
         vector<int>vec(301, 0);
         
