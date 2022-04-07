@@ -2,19 +2,20 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         
-        vector<int> dp(nums.size(), 0);
+        vector<int>lis;
         
-        dp[0] = 1;
-        int mx = 1;
+        lis.push_back(nums[0]);
+        
         for(int i = 1; i < nums.size(); i++){
-            for(int j = i - 1; j >=0; j--){
-                if(nums[j] < nums[i])
-                    dp[i] = max(dp[j], dp[i]);
+            if(lis.back() < nums[i])
+                lis.push_back(nums[i]);
+            else{
+                int positionOfEqualImmidiateGraterValue = lower_bound(lis.begin
+(), lis.end(), nums[i]) - lis.begin();
+                lis[positionOfEqualImmidiateGraterValue] = nums[i];
             }
-        
-          dp[i] += 1;
-           mx = max(mx, dp[i]);
         }
-        return mx;
+        
+        return lis.size();
     }
 };
