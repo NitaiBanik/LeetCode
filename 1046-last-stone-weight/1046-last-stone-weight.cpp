@@ -6,21 +6,17 @@ public:
             pq.push(val);
         }
         
-        int ans;
-        while(!pq.empty()){
-            if(pq.size() == 1) {
-                ans = pq.top();
-                break;
-            }
-            else{
-                int f = pq.top();
-                pq.pop();
-                int s = pq.top();
-                pq.pop();
-                
-                pq.push(f- s);
-            }
+        while(pq.size() > 1){
+            int f = pq.top();
+            pq.pop();
+            int s = pq.top();
+            pq.pop();
+
+            if(f - s > 0)
+            pq.push(f- s);
         }
-        return ans;
+        return pq.size() == 0 
+            ? 0
+            : pq.top();
     }
 };
