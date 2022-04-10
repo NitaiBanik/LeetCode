@@ -2,15 +2,15 @@ class Solution {
 public:
     int minOperations(vector<string>& logs) {
         
-        vector<string>st;
+        int cnt = 0;
         
         for(auto log: logs){
             if(log == "../"){
-                if(st.size()) st.pop_back();
+                if(cnt) cnt--;
             }
             else if(log != "./")
-                st.push_back(log);
+                cnt++;
         }
-        return st.size();
+        return cnt;
     }
 };
