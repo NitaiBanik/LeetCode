@@ -1,41 +1,25 @@
 class Solution {
 public:
-    
-    void combineValues(stack<long long>& st){
-        long long top1 = st.top();
-         st.pop();
-         
-         long long top2 = st.top();
-         
-         st.push(top1);
-         st.push(top1 + top2);
-     }
-    
     int calPoints(vector<string>& ops) {
-        stack<long long> st;
+        vector<long long> st;
         
         for(auto op: ops){
             if(op == "+"){
-                long long top1 = st.top();
-                st.pop();
-                long long sum = top1 + st.top();
-                st.push(top1);
-                st.push(sum);
+                st.push_back(st[st.size() - 1]  + st[st.size() - 2]);
             }
             else if(op == "D"){
-                st.push(st.top() * 2);
+                st.push_back(st[st.size() - 1]  + st[st.size() - 1]);
             }
             else if(op == "C")
-                st.pop();
+                st.pop_back();
             else
-                 st.push(stoi(op));
+               st.push_back(stoi(op));
         }
         
         long long sum = 0;
-        while(!st.empty()){
-            sum += st.top();
-            st.pop();
-        }
+        for(int i = 0; i < st.size(); i++)
+            sum += st[i];
+        
         return sum;
     }
 };
