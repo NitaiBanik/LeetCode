@@ -1,17 +1,6 @@
 class Solution {
 public:
-    stack<long long> executeop(stack<long long>& st, string op){
-        if(op == "+")
-            st = combineValues(st);
-        else if(op == "D")
-            st = doubleValue(st);
-        else if(op == "C")
-            st = invalidateValue(st);
-        else
-            st = addValue(st, op);
-        
-        return st;
-    }
+    
     stack<long long> combineValues(stack<long long>& st){
         long long top1 = st.top();
          st.pop();
@@ -46,7 +35,14 @@ public:
         stack<long long> st;
         
         for(auto op: ops){
-            executeop(st, op);
+             if(op == "+")
+                 st = combineValues(st);
+            else if(op == "D")
+                st = doubleValue(st);
+            else if(op == "C")
+               st = invalidateValue(st);
+            else
+                st = addValue(st, op);
         }
         
         long long sum = 0;
