@@ -11,32 +11,24 @@ public:
          st.push(top1 + top2);
      }
     
-    void doubleValue(stack<long long>& st){
-        long long top1 = st.top();
-         st.push(top1 + top1);
-     }
-    
-    void invalidateValue(stack<long long>& st){
-        st.pop();
-     }
-    
-     void addValue(stack<long long>& st, string value){
-         int val = stoi(value);
-         st.push(val);
-     }
-    
     int calPoints(vector<string>& ops) {
         stack<long long> st;
         
         for(auto op: ops){
-            if(op == "+")
-                combineValues(st);
-            else if(op == "D")
-                doubleValue(st);
+            if(op == "+"){
+                long long top1 = st.top();
+                st.pop();
+                long long sum = top1 + st.top();
+                st.push(top1);
+                st.push(sum);
+            }
+            else if(op == "D"){
+                st.push(st.top() * 2);
+            }
             else if(op == "C")
-                invalidateValue(st);
+                st.pop();
             else
-                 addValue(st, op);
+                 st.push(stoi(op));
         }
         
         long long sum = 0;
