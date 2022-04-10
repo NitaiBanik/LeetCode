@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    stack<long long> combineValues(stack<long long>& st){
+    void combineValues(stack<long long>& st){
         long long top1 = st.top();
          st.pop();
          
@@ -9,40 +9,34 @@ public:
          
          st.push(top1);
          st.push(top1 + top2);
-         
-         return st;
      }
     
-    stack<long long> doubleValue(stack<long long>& st){
+    void doubleValue(stack<long long>& st){
         long long top1 = st.top();
          st.push(top1 + top1);
-        
-         return st;
      }
     
-    stack<long long> invalidateValue(stack<long long>& st){
+    void invalidateValue(stack<long long>& st){
         st.pop();
-        return st;
      }
     
-     stack<long long> addValue(stack<long long>& st, string value){
+     void addValue(stack<long long>& st, string value){
          int val = stoi(value);
          st.push(val);
-         return st;
      }
     
     int calPoints(vector<string>& ops) {
         stack<long long> st;
         
         for(auto op: ops){
-             if(op == "+")
-                 st = combineValues(st);
+            if(op == "+")
+                combineValues(st);
             else if(op == "D")
-                st = doubleValue(st);
+                doubleValue(st);
             else if(op == "C")
-               st = invalidateValue(st);
+                invalidateValue(st);
             else
-                st = addValue(st, op);
+                 addValue(st, op);
         }
         
         long long sum = 0;
