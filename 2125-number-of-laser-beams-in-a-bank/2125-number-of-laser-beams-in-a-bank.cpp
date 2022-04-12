@@ -8,7 +8,7 @@ public:
             //cout<<beams<<endl;
             int currentDeviceCount = 0;
             for(auto beam: beams)
-                currentDeviceCount += (beam - '0');
+                currentDeviceCount += beam =='0' ? 0: 1 ;
                         
             if(currentDeviceCount > 0)
             {
