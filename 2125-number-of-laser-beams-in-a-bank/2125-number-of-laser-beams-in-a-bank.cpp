@@ -5,7 +5,7 @@ public:
         int prevDeviceCount = 0, ans = 0;
         
         for(auto beams: bank){
-            cout<<beams<<endl;
+            //cout<<beams<<endl;
             int currentDeviceCount = 0;
             for(auto beam: beams)
                 currentDeviceCount += (beam - '0');
