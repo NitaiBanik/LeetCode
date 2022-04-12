@@ -8,7 +8,6 @@ public:
     }
     
     void gameOfLife(vector<vector<int>>& board) {
-        vector<vector<int>> newBoard(board.size(), vector<int>(board[0].size(), 0));
         
         for(int i = 0; i < board.size(); i++){
             for(int j = 0; j < board[0].size(); j++){
