@@ -16,18 +16,25 @@ public:
                 for(int k = 0; k < 8; k++){
                     int p = i + fx[k], q = j + fy[k];
                     if(isValid(p, q, board.size(), board[0].size())){
-                        if(board[p][q] == 0) totalZero++;
-                        else totalOne++;
+                        if(1 & board[p][q]) totalOne++;
+                        else totalZero++;
                     }
                 }
-               if(totalOne > 3) newBoard[i][j] = 0;
-               else if(totalOne == 3) newBoard[i][j] = 1;
-                else if(totalOne < 2) newBoard[i][j] = 0;
-                else newBoard[i][j] = board[i][j];
-                
+               if(totalOne > 3) board[i][j] |= 0;
+               else if(totalOne == 3) board[i][j] |= 2;
+               else if(totalOne < 2) board[i][j] |= 0;
+               else{
+                   if(board[i][j])
+                   board[i][j] |= 2;
+                   else board[i][j] |= 0;        
             }
         }
-        
-        board = newBoard;
+        }
+       for(int i = 0; i < board.size(); i++)
+            for(int j = 0; j < board[0].size(); j++){
+                if(board[i][j] & 2)
+                    board[i][j] = 1;
+                else board[i][j] = 0;
+            }
     }
 };
