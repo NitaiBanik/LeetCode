@@ -18,12 +18,14 @@ public:
         
          for(int r = 0; r < matrix.size(); r++){
              int val = rows[r];
+             if(val)
              for(int c = 0; c < matrix[0].size(); c++)
                  if(val) matrix[r][c] = 0;
          }
         
          for(int c = 0; c < matrix[0].size(); c++){
              int val = cols[c];
+             if(val)
             for(int r = 0; r < matrix.size(); r++)
                 if(val) matrix[r][c] = 0;
             }
