@@ -7,20 +7,18 @@ public:
         
         int r = 1, d = 1, l = 2, u = 2;
         
-        int tot = rows * cols, cnt = 1;
+        int tot = rows * cols, cnt = 0;
         
         
-        vector<vector<int>> ans;
-        ans.push_back({rStart, cStart});
+        vector<vector<int>> ans(tot, vector<int>(2, 0));
+        ans[cnt++] = {rStart, cStart};
         if(cnt == tot) return ans;
         
         while(1){
-            for(int i = 0; i < r; i++){
+            for(int i = 0; i < r; i++){    
                 cStart++;
-                
                 if(isValid(rows, cols, rStart, cStart)){
-                    cnt++;
-                    ans.push_back({rStart, cStart});
+                    ans[cnt++] = {rStart, cStart};
                     if(cnt == tot) return ans;
                 }
             }
@@ -29,8 +27,7 @@ public:
                 rStart++;
                 
                  if(isValid(rows, cols, rStart, cStart)){
-                    cnt++;
-                    ans.push_back({rStart, cStart});
+                    ans[cnt++] = {rStart, cStart};
                     if(cnt == tot) return ans;
                 }
             }
@@ -39,8 +36,7 @@ public:
                 cStart--;
                 
                  if(isValid(rows, cols, rStart, cStart)){
-                    cnt++;
-                    ans.push_back({rStart, cStart});
+                    ans[cnt++] = {rStart, cStart};
                     if(cnt == tot) return ans;
                 }
             }
@@ -49,8 +45,7 @@ public:
                 rStart--;
                 
                if(isValid(rows, cols, rStart, cStart)){
-                    cnt++;
-                    ans.push_back({rStart, cStart});
+                    ans[cnt++] = {rStart, cStart};
                     if(cnt == tot) return ans;
                 }
             }
