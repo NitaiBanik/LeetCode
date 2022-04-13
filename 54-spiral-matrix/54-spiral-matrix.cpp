@@ -12,27 +12,27 @@ public:
         while(1){    
             for(int i = 0; i < r; i++){
                 ans[cnt++] = matrix[x][y++];
-                 if(cnt == tot) return ans;
+             //  if(cnt == tot) return ans;
             } 
             if(cnt == tot) return ans;
             x++, y--;  
             for(int i = 0; i < d; i++){
                 ans[cnt++] = matrix[x++][y];
-                 if(cnt == tot) return ans;
+                //if(cnt == tot) return ans;
             }
-            
+              if(cnt == tot) return ans;
             x--, y--;
             for(int i = 0; i < l; i++){
                 ans[cnt++] = matrix[x][y--]; 
-                 if(cnt == tot) return ans;
+              //  if(cnt == tot) return ans;
             }
-            
+              if(cnt == tot) return ans;
             x--, y++;
             for(int i = 0; i < u; i++){
                 ans[cnt++] = matrix[x--][y];
-                 if(cnt == tot) return ans;
+              //  if(cnt == tot) return ans;
              }
-            
+              if(cnt == tot) return ans;
             x++, y++;      
             l-=2, r-=2, u-=2, d-=2;       
         }
