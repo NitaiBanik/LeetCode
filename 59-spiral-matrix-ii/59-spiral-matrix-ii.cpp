@@ -30,8 +30,7 @@ public:
                 ans[x--][y] = ++cnt;
                 if(cnt == tot) return ans;
             }   
-            
-                        cout<<cnt<<endl;
+            //cout<<cnt<<endl;
             
             l-=2; 
             d-=2;
@@ -41,13 +40,14 @@ public:
             x++;
             y++;
             
-            cout<<l<<" "<<d<<" "<<u<<" "<<r<<endl;
+            /*cout<<l<<" "<<d<<" "<<u<<" "<<r<<endl;
             
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++)
                     cout<<ans[i][j]<<" ";
                 cout<<endl;
-            }
+                }
+                */
         }
         
         return ans;
