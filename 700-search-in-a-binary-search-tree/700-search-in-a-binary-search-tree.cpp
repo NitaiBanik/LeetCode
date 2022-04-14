@@ -17,8 +17,6 @@ public:
         if(root->val == val)
             return root;
          
-         TreeNode* ans;
-         
          if(root->val > val)
             return bfs(root->left, val);
          
