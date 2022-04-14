@@ -19,13 +19,10 @@ public:
          
          TreeNode* ans;
          
-         if(root->left)
-             ans = bfs(root->left, val);
+         if(root->val > val)
+            return bfs(root->left, val);
          
-         if(!ans && root->right)
-             ans = bfs(root->right, val);
-         
-        return ans;
+         return bfs(root->right, val);
         
     }
     
