@@ -11,21 +11,25 @@
  */
 class Solution {
 public:
-    TreeNode* ans;
-    
-    void bfs(TreeNode* root, int val){
-        if(!root) return;
+     TreeNode* bfs(TreeNode* root, int val){
+        if(!root) return NULL;
         
-        if(root->val == val){
-            ans = root;
-            return;
-        }
-        if(root->left) bfs(root->left, val);
-        if(root->right) bfs(root->right, val);
+        if(root->val == val)
+            return root;
+         
+         TreeNode* ans;
+         
+         if(root->left)
+             ans = bfs(root->left, val);
+         
+         if(!ans && root->right)
+             ans = bfs(root->right, val);
+         
+        return ans;
         
     }
+    
     TreeNode* searchBST(TreeNode* root, int val) {
-        bfs(root, val);
-        return ans;
+       return bfs(root, val);
     }
 };
