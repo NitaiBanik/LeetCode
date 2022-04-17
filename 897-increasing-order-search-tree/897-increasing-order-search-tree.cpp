@@ -11,18 +11,18 @@
  */
 class Solution {
 public:
-    stack<int> st;
-    
-    void tarverseBST(TreeNode* root){
+    void tarverseBST(TreeNode* root, stack<int>& st){
         if(!root) return;
         
-        tarverseBST(root->right);
+        tarverseBST(root->right, st);
         st.push(root->val);
-        tarverseBST(root->left);
+        tarverseBST(root->left, st);
     }
     
     TreeNode* increasingBST(TreeNode* root) {
-        tarverseBST(root);
+        stack<int> st;
+        
+        tarverseBST(root, st);
         
         TreeNode* par = new TreeNode(-1);
         TreeNode* temp = par;
