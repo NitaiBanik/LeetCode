@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-    int val,k;
-     void visit(TreeNode* root){
-        if(!root) return;
-        
-        visit(root->left);
-        k--;
-        if(k == 0) val = root->val;
-        visit(root->right);
-        
-    }
     int kthSmallest(TreeNode* root, int kth){
-        k = kth;
-        visit(root);
-        return val;
+        stack<TreeNode*> stk;
+        
+        while(1){
+            while(root){
+                stk.push(root);
+                root = root->left;
+            }
+            root = stk.top();
+            if(kth == 1) return root->val;
+            kth--;
+            stk.pop();
+            root = root->right;
+        }
     }
 };
