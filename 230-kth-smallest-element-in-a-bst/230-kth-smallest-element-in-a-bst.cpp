@@ -11,21 +11,19 @@
  */
 class Solution {
 public:
-     void visit(TreeNode* root, int k,  priority_queue<int>& pq){
+    int val,k;
+     void visit(TreeNode* root){
         if(!root) return;
         
-        pq.push(root->val);
-        
-        if(pq.size() > k) pq.pop();
-        
-        visit(root->left, k, pq);
-        visit(root->right, k, pq);
+        visit(root->left);
+        k--;
+        if(k == 0) val = root->val;
+        visit(root->right);
         
     }
-    int kthSmallest(TreeNode* root, int k) {
-        priority_queue<int> pq;
-        
-        visit(root, k, pq);
-        return pq.top();
+    int kthSmallest(TreeNode* root, int kth){
+        k = kth;
+        visit(root);
+        return val;
     }
 };
