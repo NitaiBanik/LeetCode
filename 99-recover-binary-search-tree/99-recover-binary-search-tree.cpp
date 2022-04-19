@@ -10,30 +10,32 @@
  * };
  */
 class Solution {
+    
+    TreeNode* firstNode = NULL;
+    TreeNode* secondNode = NULL;
+    TreeNode* previousNode = NULL;
 public:
-    vector<int>vec;
-    int pos;
     
     void visit(TreeNode* root){
         if(!root) return;
         
         visit(root->left);
-        vec.push_back(root->val);
-        visit(root->right);
-    }
-    
-    void revisit(TreeNode* root){
-        if(!root) return;
+        if(previousNode && previousNode->val > root->val){
+            if(firstNode == NULL){
+                firstNode = previousNode;
+                secondNode = root;
+            }
+            else
+                secondNode = root;     
+        }
         
-        revisit(root->left);
-        root->val = vec[pos++];
-        revisit(root->right);
+        previousNode = root;
+        visit(root->right);
     }
     
     void recoverTree(TreeNode* root) {
         visit(root);
-        sort(vec.begin(), vec.end());
-        pos = 0;
-        revisit(root);
+        
+        swap(firstNode->val, secondNode->val);
     }
 };
