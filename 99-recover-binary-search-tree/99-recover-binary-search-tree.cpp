@@ -23,10 +23,8 @@ public:
         if(previousNode && previousNode->val > root->val){
             if(firstNode == NULL){
                 firstNode = previousNode;
-                secondNode = root;
             }
-            else
-                secondNode = root;     
+            secondNode = root;     
         }
         
         previousNode = root;
