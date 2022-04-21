@@ -1,21 +1,36 @@
 class MyHashSet {
 public:
-    vector<bool>myHashSet;
+    vector<int>myHashSet;
     MyHashSet() {
-        vector<bool>myHashSett(1000005, 0);
+        vector<int>myHashSett(33334, 0);
         myHashSet = myHashSett;
     }
     
     void add(int key) {
-       myHashSet[key] = 1; 
+        int position = key/30;
+        int val = myHashSet[position];
+        val |= (1<<(key%30));
+        
+         //cout<<"After add val = "<<val<<endl;
+        
+       myHashSet[position] = val; 
     }
     
     void remove(int key) {
-         myHashSet[key] = 0;
+        int position = key/30;
+        int val = myHashSet[position];
+        val &= ~(1<<(key%30));
+        
+         myHashSet[position] = val; 
     }
     
     bool contains(int key) {
-        return  myHashSet[key] == 1;
+        int position = key/30;
+        int val = myHashSet[position];
+        
+       // cout<<"val = "<<val<<endl;
+        
+        return  (val & (1<<(key%30)))> 0;
     }
 };
 
