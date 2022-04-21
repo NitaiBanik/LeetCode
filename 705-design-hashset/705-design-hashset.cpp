@@ -1,8 +1,8 @@
 class MyHashSet {
 public:
-    vector<int>myHashSet;
+    vector<bool>myHashSet;
     MyHashSet() {
-        vector<int>myHashSett(1000005, 0);
+        vector<bool>myHashSett(1000005, 0);
         myHashSet = myHashSett;
     }
     
