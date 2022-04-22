@@ -1,21 +1,20 @@
+int hashh[1000001];
 class MyHashMap {
 public:
-    vector<int> hash = vector<int>(1000001, -1);
     MyHashMap() {
-        
+        memset(hashh, -1, sizeof(hashh));   
     }
     
     void put(int key, int value) {
-        hash[key] = value;
+        hashh[key] = value;
     }
     
     int get(int key) {
-        return hash[key];
-        
+        return hashh[key];  
     }
     
     void remove(int key) {
-        hash[key] = -1;
+        hashh[key] = -1;
     }
 };
 
