@@ -3,32 +3,27 @@ public:
     int leastInterval(vector<char>& tasks, int n) {
         vector<int>taskCount(26, 0);
         
-        priority_queue<int>frequency;
-        queue<pair<int, int>>collingFrequency;
+        int maxFrequency = 0, maxFrequencyCount = 0;
         
-        for(auto task: tasks)
+        for(auto task: tasks){
             taskCount[task-'A']++;
-        
-        for(int i = 0; i < 26; i++)
-            if(taskCount[i] > 0)
-                frequency.push(taskCount[i]);
-        
-        int time = 0;
-        while(!frequency.empty() || !collingFrequency.empty()){
-            time++;
             
-            if(!frequency.empty()){
-                int top = frequency.top();
-                frequency.pop();
-                
-                if(top > 1) collingFrequency.push({top-1, time + n});
-            }
+            if(taskCount[task-'A'] == maxFrequency)
+                maxFrequencyCount++;
             
-            if(!collingFrequency.empty() && collingFrequency.front().second == time){
-                frequency.push(collingFrequency.front().first);
-                collingFrequency.pop();
-            }
+            if(taskCount[task-'A'] > maxFrequency){
+                maxFrequency = taskCount[task-'A'];
+                maxFrequencyCount = 1;
+            }     
         }
-        return time;
+        
+        int totalPartition = maxFrequency - 1;
+        int availableSlotsInAPartition = n - maxFrequencyCount + 1;
+        int totalAvailableSlots = totalPartition * availableSlotsInAPartition;
+        int availableTasks =  tasks.size() - maxFrequency *  maxFrequencyCount;
+        
+        int extraSlots = max(0, totalAvailableSlots - availableTasks);
+        
+        return tasks.size() + extraSlots;
     }
 };
