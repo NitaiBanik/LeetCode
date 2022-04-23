@@ -1,16 +1,20 @@
 class Solution {
 public:
-   // map<string, string>urlMapper;
+     map<int, string>urlMapper;
+    int pos = -1;
     // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
         
-        return longUrl;
+        urlMapper[++pos] = longUrl;
+        
+        return to_string(pos);
         
     }
 
     // Decodes a shortened URL to its original URL.
     string decode(string shortUrl) {
-        return shortUrl;
+        int pos = stoi(shortUrl);
+        return urlMapper[pos];
     }
 };
 
