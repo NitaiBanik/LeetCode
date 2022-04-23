@@ -1,6 +1,6 @@
 class Solution {
 public:
-     map<int, string>urlMapper;
+    string urlMapper[10001];
     int pos = -1;
     // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
