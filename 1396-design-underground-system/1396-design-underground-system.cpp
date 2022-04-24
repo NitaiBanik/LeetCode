@@ -3,8 +3,8 @@ public:
     map<int, string>startStation;
     map<int, int>startTime;
     
-    map<pair<string, string>, int>startEndStationCount;
-    map<pair<string, string>, int>startEndStationTotal;
+    map<string, int>startEndStationCount;
+    map<string, int>startEndStationTotal;
     
     UndergroundSystem() {
         
@@ -19,13 +19,13 @@ public:
         string start = startStation[id];
         int startTimee = startTime[id];
         
-        startEndStationCount[{start, stationName}]++;
-        startEndStationTotal[{start, stationName}] += (t - startTimee);
+        startEndStationCount[start + "_" + stationName]++;
+        startEndStationTotal[start+ "_" + stationName] += (t - startTimee);
         
     }
     
     double getAverageTime(string startStation, string endStation) {
-        return (double)startEndStationTotal[{startStation, endStation}] / (double)startEndStationCount[{startStation, endStation}];
+        return (double)startEndStationTotal[startStation + "_" + endStation] / (double)startEndStationCount[startStation + "_" + endStation];
     }
 };
 
