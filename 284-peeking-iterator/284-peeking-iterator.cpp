@@ -19,7 +19,6 @@
 
 class PeekingIterator : public Iterator {
 public:
-    vector<int>vec;
 	PeekingIterator(const vector<int>& nums) : Iterator(nums) {
 	    // Initialize any member here.
 	    // **DO NOT** save a copy of nums and manipulate it directly.
