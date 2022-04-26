@@ -1,48 +1,42 @@
 class Solution {
 public:
-    vector<int> parent;
     
-    int findParent(int a){
-        if(parent[a] == a) return a;
-        return parent[a] = findParent(parent[a]);
-    }
     
-    void Union(int a, int b){
-        parent[findParent(b)] = findParent(a); 
-    }
-    
-    int calculateMinimumSpanningTree(vector<pair<int, pair<int, int>> >& edges){
+    int minCostConnectPoints(vector<vector<int>>& points) {
+        priority_queue<pair<int, int>> heap;
+        int totalPoints = points.size();
         
-        int cost = 0;
-        for(int i = 0; i< edges.size(); i++){
-            int a = findParent(edges[i].second.first);
-            int b = findParent(edges[i].second.second);
+        vector<bool> visited(totalPoints);
+        
+        heap.push({0,0});
+        
+        int totalCost = 0, edgeCount = 0;
+        
+        while(edgeCount < totalPoints){
             
-            if(a != b){
-                Union(a, b);
-                cost += edges[i].first;
+            pair<int,int>top = heap.top();
+            heap.pop();
+            int cost = top.first;
+            int currentNode = top.second;
+            
+            if(visited[currentNode]) continue;
+            
+            visited[currentNode] = true;
+            totalCost += -cost;
+            
+            edgeCount++;
+            
+            for(int i = 0; i < totalPoints; i++){
+                if(visited[i]) continue;
+                
+                int weight = abs(points[currentNode][0] - points[i][0]) +  abs(points[currentNode][1] - points[i][1]);
+                
+                heap.push({-weight, i});
             }
+            
         }
         
-        return cost;
-    }
-    int minCostConnectPoints(vector<vector<int>>& points) {
-        
-        vector<pair<int, pair<int, int>>> edges;
-        
-        for(int i = 0 ; i < points.size() - 1; i++)
-            for(int j = i + 1; j < points.size(); j++){
-                int distance = abs(points[i][0]- points[j][0]) +  abs(points[i][1]- points[j][1]);
-                edges.push_back({distance, {i, j}});
-            } 
-        
-        sort(edges.begin(), edges.end());
-        
-        parent = vector<int>(points.size() + 2);
-        for(int i = 0; i <= points.size(); i++)
-            parent[i] = i;
-        
-        return calculateMinimumSpanningTree(edges);
+        return totalCost;
          
     }
 };
