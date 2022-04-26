@@ -3,35 +3,38 @@ public:
     
     
     int minCostConnectPoints(vector<vector<int>>& points) {
-        priority_queue<pair<int, int>> heap;
         int totalPoints = points.size();
+        vector<int>pointCost(totalPoints, INT_MAX);
         
         vector<bool> visited(totalPoints);
         
-        heap.push({0,0});
+        pointCost[0] = 0;
         
         int totalCost = 0, edgeCount = 0;
         
         while(edgeCount < totalPoints){
+            int currnetPointCost = INT_MAX, currentPoint;
             
-            pair<int,int>top = heap.top();
-            heap.pop();
-            int cost = top.first;
-            int currentNode = top.second;
+            for(int i = 0; i < totalPoints; i++){
+                if(visited[i] == false && pointCost[i] < currnetPointCost){
+                    currentPoint = i;
+                    currnetPointCost = pointCost[i];
+                }
+            }
             
-            if(visited[currentNode]) continue;
-            
-            visited[currentNode] = true;
-            totalCost += -cost;
-            
+            visited[currentPoint] = true;
+            totalCost += currnetPointCost;
             edgeCount++;
+            
+            
             
             for(int i = 0; i < totalPoints; i++){
                 if(visited[i]) continue;
                 
-                int weight = abs(points[currentNode][0] - points[i][0]) +  abs(points[currentNode][1] - points[i][1]);
+                int weight = abs(points[currentPoint][0] - points[i][0]) +  abs(points[currentPoint][1] - points[i][1]);
                 
-                heap.push({-weight, i});
+               if(pointCost[i] > weight)
+                   pointCost[i]= weight;
             }
             
         }
