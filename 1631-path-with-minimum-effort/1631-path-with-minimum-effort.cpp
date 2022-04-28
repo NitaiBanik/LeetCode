@@ -39,7 +39,7 @@ public:
                     if(cost < costs[currentRow][currentCol])
                     {
                          costs[currentRow][currentCol] = cost;
-                         pq.push({-cost, {currentRow, currentCol}});
+                         pq.push({-costs[currentRow][currentCol], {currentRow, currentCol}});
                     }
                 }
             }
