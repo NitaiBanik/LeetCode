@@ -19,7 +19,7 @@ public:
             pair<int, pair<int, int>> top = pq.top();
             pq.pop();
             
-            if(top.first > costs[top.second.first][top.second.second])
+            if(-top.first > costs[top.second.first][top.second.second])
                 continue;
             
             costs[top.second.first][top.second.second] = -top.first;
