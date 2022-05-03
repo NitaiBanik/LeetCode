@@ -2,28 +2,37 @@ class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
         
-        int begin = nums.size(), end = 0;
+        int mn = INT_MAX, mx = INT_MIN;
+        bool found = false;
         
-        stack<int>positions;
-        
-        for(int i = 0; i < nums.size(); i++){
-            while(!positions.empty() && nums[positions.top()] > nums[i]){
-                begin = min(begin, positions.top());
-                positions.pop();
-            }
-            positions.push(i);
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i - 1] > nums[i]){
+                found  = true;
+            }           
+            if(found)
+                mn= min(mn, nums[i]);
+                
         }
         
-        while(!positions.empty())
-            positions.pop();
+        found= false;
         
-        for(int i = nums.size() -1; i >= 0; i--){
-            while(!positions.empty() && nums[positions.top()] < nums[i]){
-                end = max(end, positions.top());
-                positions.pop();
+        for(int i = nums.size() - 2; i >= 0; i--){
+            if(nums[i + 1] < nums[i]){
+                found = true;
             }
-            positions.push(i);
+            if(found)
+                mx = max(mx, nums[i]);
         }
+        
+        int begin = 0, end = 0;
+        
+        for(begin = 0; begin < nums.size(); begin++)
+            if(nums[begin] > mn) break;
+        
+        for(end = nums.size()-1; end >=0; end--)
+            if(nums[end] < mx) break;
+        
+        //cout<<"begin = "<<begin<<" end = "<<end<<endl;
         
         return end-begin >= 0 ? end - begin + 1 : 0;
         
