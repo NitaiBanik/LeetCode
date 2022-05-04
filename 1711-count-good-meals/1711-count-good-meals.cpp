@@ -1,7 +1,7 @@
 class Solution {
 public:
     int countPairs(vector<int>& deliciousness) {
-        int ans = 0;
+        long long ans = 0;
         
         map<int, int> frequency;
         
@@ -11,12 +11,11 @@ public:
                int need = j - deliciousness[i];
                 
                 ans += frequency[need];
-                ans %= 1000000007;
             }
             frequency[deliciousness[i]]++;
             
         }
         
-        return ans;
+        return ans% 1000000007;
     }
 };
