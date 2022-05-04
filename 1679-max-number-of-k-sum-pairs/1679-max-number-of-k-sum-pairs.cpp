@@ -7,7 +7,7 @@ public:
         for(auto num: nums){
             int need = k - num;
             
-            if(frequency[need]>0){
+            if(frequency.find(need) != frequency.end() && frequency[need]>0){
                 answer++;
                 frequency[need]--;
             }
