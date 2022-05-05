@@ -1,23 +1,21 @@
 class MyStack {
 public:
-    queue<int> temporaryQueue, mainQueue;
+    queue<int> mainQueue;
     
     MyStack() {
         
     }
     
     void push(int x) {
-       temporaryQueue = mainQueue;
-        
-        while(!mainQueue.empty()){
-            mainQueue.pop();
-        }
         
         mainQueue.push(x);
         
-         while(!temporaryQueue.empty()){
-            mainQueue.push(temporaryQueue.front());
-            temporaryQueue.pop();
+        int queueSize = mainQueue.size();
+        
+         while(queueSize > 1){
+            mainQueue.push(mainQueue.front());
+            mainQueue.pop();
+            queueSize--;
         }   
     }
     
