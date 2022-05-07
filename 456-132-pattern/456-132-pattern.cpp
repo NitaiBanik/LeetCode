@@ -16,7 +16,7 @@ public:
         for(int i = nums.size() -1; i >= 0; i--){
             auto lowerBound = stt.lower_bound((long long)leftMin[i] + 1);
             
-            if(lowerBound != stt.end() && *lowerBound > leftMin[i] && leftMin[i] < nums[i] && nums[i] > *lowerBound)
+            if(lowerBound != stt.end() && leftMin[i] < nums[i] && nums[i] > *lowerBound)
                 return true;
             stt.insert(nums[i]);
         }
