@@ -1,7 +1,7 @@
 class Solution {
 public:
-    vector<int> nextPermutation(vector<int>& nums){
-        if(nums.size() < 2) return {};
+    bool nextPermutation(vector<int>& nums){
+        if(nums.size() < 2) return false;
         
         int lf = -1;
         
@@ -12,7 +12,7 @@ public:
             }
         }
         
-        if(lf == -1) return {};
+        if(lf == -1) return false;
         sort(nums.begin() + lf + 1,nums.end());
         
         for(int i = lf + 1; i < nums.size(); i++){
@@ -22,7 +22,7 @@ public:
             }
         }
         
-        return nums;
+        return true;
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         
@@ -30,11 +30,10 @@ public:
         
         sort(nums.begin(), nums.end());
         
-        while(1){
+        do{
             answer.push_back(nums);
-            nums = nextPermutation(nums);
-            if(nums.size() == 0) break;
-        }
+        }while(nextPermutation(nums));
+        
         return answer;
     }
 };
