@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool nextPermutation(vector<int>& nums){
+    bool next_permutation(vector<int>& nums){
         if(nums.size() < 2) return false;
         
         int lf = -1;
@@ -32,7 +32,7 @@ public:
         
         do{
             answer.push_back(nums);
-        }while(nextPermutation(nums));
+        }while(next_permutation(nums));
         
         return answer;
     }
