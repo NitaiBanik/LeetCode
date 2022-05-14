@@ -8,18 +8,18 @@ public:
             graph[edge[0]].push_back({edge[1], edge[2]});
         }
         
-        priority_queue<pair<int, int>>Q;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> >Q;
         
-        Q.push({0, k});
+        Q.push({k, 0});
         cost[k] = 0;
         
         while(!Q.empty()){
             pair<int, int> top = Q.top();
             Q.pop();
-            for(auto edge: graph[top.second]){
-                if(cost[edge.first] > edge.second - top.first){
-                    cost[edge.first] =  edge.second - top.first;
-                    Q.push({-cost[edge.first], edge.first});
+            for(auto edge: graph[top.first]){
+                if(cost[edge.first] > edge.second + top.second){
+                    cost[edge.first] =  edge.second + top.second;
+                    Q.push({edge.first, cost[edge.first]});
                 }
             }
         }
