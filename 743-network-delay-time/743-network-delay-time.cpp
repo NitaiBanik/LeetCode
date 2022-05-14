@@ -1,37 +1,38 @@
 class Solution {
 public:
-    int mx = INT_MIN;
-    vector<pair<int, int>> graph[103];
-    
-    void dfs(int node, int time, vector<int>& visited){
-        
-        visited[node] = time;
-       // mx = max(mx, time);
-        
-        for(auto edge: graph[node]){
-            if(time + edge.second < visited[edge.first])
-            dfs(edge.first, time + edge.second, visited);
-        }
-    }
-    
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        vector<int> visited(n + 1, INT_MAX);
+        vector<int> cost(n + 1, INT_MAX);
         
+        vector<pair<int, int>> graph[n + 1];
         for(auto edge: times){
             graph[edge[0]].push_back({edge[1], edge[2]});
         }
         
-        dfs(k , 0, visited);
+        priority_queue<pair<int, int>>Q;
+        
+        Q.push({0, k});
+        cost[k] = 0;
+        
+        while(!Q.empty()){
+            pair<int, int> top = Q.top();
+            Q.pop();
+            for(auto edge: graph[top.second]){
+                if(cost[edge.first] > edge.second - top.first){
+                    cost[edge.first] =  edge.second - top.first;
+                    Q.push({-cost[edge.first], edge.first});
+                }
+            }
+        }
         
         int totalVisited = 0;
         for(int i = 1; i<= n; i++)
-            //cout<<visited[i]<<endl;
-            totalVisited += (visited[i] != INT_MAX);
+            totalVisited += (cost[i] != INT_MAX);
         
-     //   cout<<"tot = "<<totalVisited<<endl;
-        
-        for(int i = 1; i<= n; i++)
-            mx = max(mx, visited[i]);
+        int mx = INT_MIN;
+        for(int i = 1; i<= n; i++){
+            //cout<<"node = "<<i<<" cost = "<<cost[i]<<endl;
+            mx = max(mx, cost[i]);
+        }
         
         
         return totalVisited == n ? mx: -1;
