@@ -21,15 +21,15 @@ public:
         return graph;
     }
     
-    int getMaxTime(int nodes, int startNode, vector<vector<int>>&graph){ 
-        int maxTime = INT_MIN;
+    int getMaximumDelayTime(int nodes, int startNode, vector<vector<int>>&graph){ 
+        int maximumDelayTime = INT_MIN;
         for(int node = 1; node <= nodes; node++){
             if(graph[startNode][node] == maximumPossibleCost) return -1;
             
-            maxTime = max(maxTime, graph[startNode][node]);
+            maximumDelayTime = max(maximumDelayTime, graph[startNode][node]);
         }
         
-        return maxTime;
+        return maximumDelayTime;
     }
     
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {    
@@ -38,7 +38,7 @@ public:
         graph = buildGraphFromInput(n, graph, times);
         graph = computeDelayTimesByFloydWarshal(n, graph);
         
-        return getMaxTime(n, k, graph);
+        return getMaximumDelayTime(n, k, graph);
         
     }
 };
