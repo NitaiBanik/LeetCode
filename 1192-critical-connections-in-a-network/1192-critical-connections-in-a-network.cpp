@@ -3,7 +3,9 @@ public:
     vector<vector<int>>answer;
     vector<vector<int>>graph;
     
-    vector<int>firstTime, minimumTime, isVisited;
+    vector<int>firstTime, minimumTime;
+    vector<bool>isVisited;
+    
     int time = 1;
     
     void dfs(int node, int parent){
@@ -26,7 +28,7 @@ public:
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
         graph = vector<vector<int>>(n + 1);
         minimumTime = vector<int>(n + 1);
-        isVisited = vector<int>(n + 1, 0);
+        isVisited = vector<bool>(n + 1, false);
         firstTime = vector<int>(n + 1);
         
         for(auto edge: connections){
