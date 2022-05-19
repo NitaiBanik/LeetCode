@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<pair<int, int>> directions = {{-1,0},{1,0},{0,-1},{0,1}};
-       
-    int lis(int x, int y, int rows, int columns, vector<vector<int>>& matrix, vector<vector<int>>& dp){
+    int dp[202][202];
+    int lis(int x, int y, int rows, int columns, vector<vector<int>>& matrix){
         if(dp[x][y] != -1) return dp[x][y];
         
         int mx = 1;
@@ -13,7 +13,7 @@ public:
             if(currentX < 0 || currentX >= rows || currentY < 0 || currentY >= columns) continue;
             
             if(matrix[currentX][currentY] < matrix[x][y])
-                mx = max(mx, 1 + lis(currentX, currentY, rows, columns, matrix, dp) );
+                mx = max(mx, 1 + lis(currentX, currentY, rows, columns, matrix));
         }
         
         return  dp[x][y] =  mx;
@@ -22,13 +22,14 @@ public:
         int rows = matrix.size();
         int columns = matrix[0].size();
         
-        vector<vector<int>> dp(rows, vector<int>(columns, -1));
+        memset(dp, -1, sizeof(dp));
+
         int mx = 1;
         
         for(int i = 0; i < rows; i++)
             for(int j = 0; j < columns; j++){
                 if(dp[i][j] == -1)
-                    lis(i, j, rows, columns, matrix, dp);
+                    lis(i, j, rows, columns, matrix);
                 
                 mx = max(mx, dp[i][j]);
             }
