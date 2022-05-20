@@ -1,19 +1,18 @@
 class Solution {
 public:
-    int lengthOfLastWord(string s) {
-        int last = s.size() - 1;  
-        int cnt = 0, isFound = false;
+    int lengthOfLastWord(string s) {     
+        int wordLength = 0, isWordStarted = false;
         
-        for(int i = last; i>=0; i--){
-            if(s[i] == ' ' && isFound == true)
+        for(int i = s.size() - 1; i >= 0; i--){
+            if(s[i] == ' ' && isWordStarted == true)
                 break;
-            if(s[i] != ' ')
-                isFound = true;
             
-            if(isFound) cnt++;
-        }
-        
-        return cnt;
+            if(s[i] != ' ')
+                isWordStarted = true;
+            
+            if(isWordStarted) wordLength++;
+        }     
+        return wordLength;
         
     }
 };
