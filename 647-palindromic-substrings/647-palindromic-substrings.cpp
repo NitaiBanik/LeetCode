@@ -1,24 +1,27 @@
 class Solution {
 public:
-    bool isPalindrome(string str){
-        int ln = str.size();
-        for(int i = 0; i< ln / 2; i++){
-            if(str[i] != str[ln - i - 1])
-                return false;
-        }
-        return true;
+    int palilndrome(int lf, int rt, string& s, vector<vector<int>>& dp){
+        if(lf >= rt) return 1;
+        
+        if(dp[lf][rt] != -1) return dp[lf][rt];
+        
+        if(s[lf] == s[rt])
+            dp[lf][rt] = palilndrome(lf + 1, rt - 1, s, dp);
+        else dp[lf][rt] = 0;
+        
+        return dp[lf][rt];
     }
     int countSubstrings(string s) {
-        int cnt = 0;
+        vector<vector<int>> dp(s.size(), vector<int>(s.size(), - 1));
+        
+        int count = 0;
         for(int i = 0; i < s.size(); i++){
-            string str = "";
             for(int j = i; j < s.size(); j++){
-                str += s[j];
-                if(isPalindrome(str)) cnt++;
+             count += palilndrome(i, j, s, dp); 
             }
         }
         
-        return cnt;
+        return count;
         
     }
 };
