@@ -10,9 +10,12 @@ public:
     
     int maxProduct(vector<string>& words) {
         vector<int> existingLetters(words.size(), 0);
+        vector<int> length(words.size(), 0);
         
-         for(int i = 0; i < words.size(); i++)
+         for(int i = 0; i < words.size(); i++){
             existingLetters[i] = getExistingLetterAsBits(words[i]);
+             length[i] = words[i].size();
+         }
 
         int mx = 0;
         
@@ -22,7 +25,7 @@ public:
                 
                 if(existingLetters[i] & existingLetters[j]) continue;
         
-                mx = max(mx, (int)words[i].size() * (int)words[j].size());
+                mx = max(mx, length[i] * length[j]);
             }
         }
         
