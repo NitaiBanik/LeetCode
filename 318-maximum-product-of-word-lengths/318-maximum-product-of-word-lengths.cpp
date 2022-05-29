@@ -9,17 +9,18 @@ public:
     }
     
     int maxProduct(vector<string>& words) {
+        vector<int> existingLetters(words.size(), 0);
         
+         for(int i = 0; i < words.size(); i++)
+            existingLetters[i] = getExistingLetterAsBits(words[i]);
+
         int mx = 0;
         
         for(int i = 0; i < words.size(); i++){
-            int existingLetters = getExistingLetterAsBits(words[i]);
-            //cout<<words[i]<<" existingLetters = "<<existingLetters<<endl;
             for(int j =  i + 1; j < words.size(); j++){
                 int existingLetters2 = getExistingLetterAsBits(words[j]);
-               // cout<<words[j]<<" existingLetters2 = "<<existingLetters2<<endl;
                 
-                if(existingLetters & existingLetters2) continue;
+                if(existingLetters[i] & existingLetters[j]) continue;
         
                 mx = max(mx, (int)words[i].size() * (int)words[j].size());
             }
