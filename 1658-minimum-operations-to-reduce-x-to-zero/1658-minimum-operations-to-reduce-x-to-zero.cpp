@@ -13,15 +13,14 @@ public:
         if(sum == 0) return nums.size();   
         if(sum < 0) return -1;
         
-        for(int i = 0; i < nums.size(); i++) {
-			curr += nums[i];
-
-			while(curr > sum)
-				curr -= nums[lf++];
-
-			if(curr == sum)
-				mn = max(mn, i - lf + 1);
-		}
+        for(int i = 0; i < nums.size(); i++)
+        {
+            curr += nums[i];
+            while(curr > sum)
+                curr -= nums[lf++];
+            if(curr == sum)
+                mn = max(mn, i - lf + 1);
+        }    
         
       return mn == 0 ? -1: nums.size() - mn; 
     }
