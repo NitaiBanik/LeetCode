@@ -1,17 +1,16 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
-        map<int, int>frequency;
+        map<int, bool>frequency;
         int sum = 0, lf = 0, mx = 0;
         
         for(int i = 0; i < nums.size(); i++){
-            sum+= nums[i];
-            frequency[nums[i]]++;
-            
-            while(frequency[nums[i]] > 1){
-                frequency[nums[lf]]--;
+            while(frequency[nums[i]] == true){
+                frequency[nums[lf]] = false;
                 sum-= nums[lf++];
             }
+             sum+= nums[i];
+            frequency[nums[i]] = true;
             mx = max(mx, sum);
         }
         return mx;
