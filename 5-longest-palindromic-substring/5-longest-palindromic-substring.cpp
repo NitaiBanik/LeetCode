@@ -5,7 +5,7 @@ public:
         for(int i = 0; i < s.size(); i++)
             temp = temp + s[i] + '|';
         
-        cout<<"temp = "<<temp<<endl;
+       // cout<<"temp = "<<temp<<endl;
         
         int lf = 0, rt = 0, mx = 0;
         
@@ -26,7 +26,7 @@ public:
             }
         }
         s = "";
-        cout<<temp<<endl;
+      //  cout<<temp<<endl;
         
         for(int i = lf; i <= rt; i++)
             if(temp[i] != '|')
