@@ -4,12 +4,9 @@ public class Solution {
         
         for(int i = n.Length - 1; i >= 0; i--){
             int value = n[i]-'0';
-            
-            if(value <= mx) continue;
-            
-            sum += (value- mx);
+
             mx = Math.Max(mx, value);
         }
-        return  sum;
+        return  mx;
     }
 }
