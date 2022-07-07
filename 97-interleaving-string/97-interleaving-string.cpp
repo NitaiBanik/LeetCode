@@ -1,11 +1,11 @@
 class Solution {
 public:
-    int dp[105][105][205];
+    int dp[105][105];
     
     bool fun(int x, int y, int z, string s1, string s2, string s3){
         if(x == s1.size() && y == s2.size())
             return 1;
-        if(dp[x][y][z] != -1) return dp[x][y][z];
+        if(dp[x][y] != -1) return dp[x][y];
         
         int ans = 0;
         
@@ -15,7 +15,7 @@ public:
          if(s2[y] == s3[z])
             ans |= fun(x, y + 1, z + 1, s1, s2, s3);
         
-        return dp[x][y][z] = ans;
+        return dp[x][y]= ans;
     }
     bool isInterleave(string s1, string s2, string s3) {
         
