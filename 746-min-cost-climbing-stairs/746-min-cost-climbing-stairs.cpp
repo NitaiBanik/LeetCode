@@ -1,20 +1,15 @@
 class Solution {
 public:
-    int dp[1005][2];
-    
-    int fun(int pos, int state, vector<int>& cost){
-        if(pos == cost.size())
-            return 0;
-        
-        if(dp[pos][state] != -1) return dp[pos][state];
-        
-        if(state == 1)
-            return dp[pos][state] = cost[pos] + fun(pos + 1, 0, cost);
-        else
-            return dp[pos][state] = min(cost[pos] + fun(pos + 1, 0, cost), fun(pos + 1, 1, cost));
-    }
     int minCostClimbingStairs(vector<int>& cost) {
-        memset(dp, -1, sizeof(dp));
-        return fun(0, 0, cost);
+        int dp[cost.size()][2];
+        dp[0][0] = 0;
+        dp[0][1] = cost[0];
+                
+        for(int i = 1; i < cost.size(); i++){
+            dp[i][0] = dp[i-1][1];
+            dp[i][1] = min(cost[i] + dp[i-1][0], cost[i] + dp[i-1][1]);
+            
+        }
+      return min(dp[cost.size() - 1][0], dp[cost.size() - 1][1]);  
     }
 };
