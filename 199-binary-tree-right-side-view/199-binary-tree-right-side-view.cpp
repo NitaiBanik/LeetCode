@@ -11,17 +11,24 @@
  */
 class Solution {
 public:
-    vector<int> vec;
+    vector<int> vec[105];
     void fun(TreeNode* root, int lvl){
         if(!root) return;
         
-        if(vec.size() < lvl) vec.push_back(root->val);
+        vec[lvl].push_back(root->val);
         
-        fun(root->right, lvl + 1);
         fun(root->left, lvl + 1);
+        fun(root->right, lvl + 1);
     }
     vector<int> rightSideView(TreeNode* root) {
         fun(root, 1);
-        return vec;
+        
+        vector<int>answer;
+        
+        for(int i = 0; i < 100; i++){
+            if(vec[i].size() > 0)
+            answer.push_back(vec[i][vec[i].size() - 1]);
+    }
+        return answer;
     }
 };
