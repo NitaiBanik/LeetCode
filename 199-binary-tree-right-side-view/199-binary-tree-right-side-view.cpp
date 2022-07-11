@@ -11,24 +11,31 @@
  */
 class Solution {
 public:
-    vector<int> vec[105];
-    void fun(TreeNode* root, int lvl){
-        if(!root) return;
+    vector<int> rightSideView(TreeNode* root) { 
+       if(!root) return {};
         
-        vec[lvl].push_back(root->val);
-        
-        fun(root->left, lvl + 1);
-        fun(root->right, lvl + 1);
-    }
-    vector<int> rightSideView(TreeNode* root) {
-        fun(root, 1);
+       queue<TreeNode*> Queue;
+       Queue.push(root);
         
         vector<int>answer;
+
+        while(!Queue.empty()){
+            int sz = Queue.size();
+            for(int i = 0; i < sz; i++){
+                TreeNode* front = Queue.front();
+                Queue.pop();
+                
+                if(i == sz - 1)
+                    answer.push_back(front->val);
+                
+                if(front->left)
+                    Queue.push(front->left);
+                
+                if(front->right)
+                    Queue.push(front->right);
+            }
+        }
         
-        for(int i = 0; i < 100; i++){
-            if(vec[i].size() > 0)
-            answer.push_back(vec[i][vec[i].size() - 1]);
-    }
         return answer;
     }
 };
