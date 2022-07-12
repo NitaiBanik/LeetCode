@@ -1,16 +1,19 @@
 class Solution {
 public:
-    vector<int> grayCode(int n) {
-       vector<int>ans(1, 0);
+    vector<int> fun(int pos){
+        if(pos == 1) return {0, 1};
         
-        for(int i = 0; i < n; i++){
-            int sz = ans.size();
-            
-            while(sz){
-                ans.push_back(ans[sz-1] | (1 << i));
-                sz--;
-            }
-        }
-          return ans;
+        vector<int> result;
+        vector<int>temp = fun(pos-1);
+        
+        result = temp;
+        
+        for(int i = temp.size() - 1; i >=0; i--)
+            result.push_back(temp[i] | (1 << (pos-1)));
+        
+        return result;
+    }
+    vector<int> grayCode(int n) {
+          return fun(n);
     }
 };
