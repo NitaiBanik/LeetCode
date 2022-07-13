@@ -11,21 +11,21 @@
  */
 class Solution {
 public:
-    pair<int, int> calculateAmount(TreeNode* root){
-        if(!root) return {0,0};
+    map<TreeNode*, map<bool, int>>dp;
+    int calculateAmount(TreeNode* root, bool take){
+        if(!root) return 0;
         
-        pair<int, int> leftAmount = calculateAmount(root->left);
-        pair<int, int> rightAmount = calculateAmount(root->right);
-
-        int takingRootAmount = root->val + leftAmount.second + rightAmount.second;
-        int notTakingRootAmount = max(leftAmount.first, leftAmount.second) + max(rightAmount.first, rightAmount.second);
+        if(dp[root][take]) return dp[root][take];
         
-        return {takingRootAmount, notTakingRootAmount};
+        
+        if(take)
+            return dp[root][take] = max(root->val + calculateAmount(root->left, false) + calculateAmount(root->right, false), calculateAmount(root->left, true) + calculateAmount(root->right, true));
+        
+       else 
+           return dp[root][take] = calculateAmount(root->left, true) + calculateAmount(root->right, true);
     }
     int rob(TreeNode* root) {
-        pair<int, int> ans = calculateAmount(root);
-        
-        return max(ans.first, ans.second);
+        return calculateAmount(root, true);
         
     }
 };
