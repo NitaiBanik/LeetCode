@@ -1,29 +1,34 @@
+struct Node{
+    const string& word;
+    int index;
+    Node(const string& _word, int _index): word(_word), index(_index){}
+};
+
 class Solution {
 public:
-    bool isFound(string s, vector<vector<int>>& characterIndecies){
-        int foundAt = -1; 
-        for(int i = 0; i < s.size(); i++){
-            auto position = lower_bound(characterIndecies[s[i]-'a'].begin(), characterIndecies[s[i]-'a'].end(), foundAt);    
-
-            if(position == characterIndecies[s[i]-'a'].end())
-                return false;
-
-            foundAt = *position + 1;
-        }
-        return true;
-    }
-    
     int numMatchingSubseq(string s, vector<string>& words) {
+        vector<Node> buckets[26];
+        int answer = 0;
         
-        vector<vector<int>> characterIndecies(26);  
-        for(int i = 0; i < s.size(); i++)
-            characterIndecies[s[i]-'a'].push_back(i);
+        for(string& word: words)
+            buckets[word[0]-'a'].emplace_back(word, 0);
         
-        int count = 0;
-        for(auto word: words){
-            count += isFound(word, characterIndecies);
+        for(char chr: s){
+            auto bucket = buckets[chr-'a'];
+            buckets[chr-'a'].clear();
+            
+            for(Node& node: bucket){
+                node.index++;
+                
+                if(node.index == node.word.size()){
+                    answer++;
+                }
+                else{
+                    buckets[node.word[node.index] - 'a'].push_back(node);
+                }
+            }
         }
         
-        return count;
+        return answer;
     }
 };
