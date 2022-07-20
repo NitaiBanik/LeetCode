@@ -1,7 +1,8 @@
 struct Node{
     const string& word;
     int index;
-    Node(const string& _word, int _index): word(_word), index(_index){}
+    int sz;
+    Node(const string& _word, int _index, int _sz): word(_word), index(_index), sz(_sz){}
 };
 
 class Solution {
@@ -11,7 +12,7 @@ public:
         int answer = 0;
         
         for(string& word: words)
-            buckets[word[0]-'a'].emplace_back(word, 0);
+            buckets[word[0]-'a'].emplace_back(word, 0, word.size());
         
         for(char chr: s){
             auto bucket = buckets[chr-'a'];
@@ -20,7 +21,7 @@ public:
             for(Node& node: bucket){
                 node.index++;
                 
-                if(node.index == node.word.size()){
+                if(node.index == node.sz){
                     answer++;
                 }
                 else{
