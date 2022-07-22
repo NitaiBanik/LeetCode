@@ -12,7 +12,7 @@ public:
     
     int pickIndex() {
         int index = rand() % totalSum;
-        int id = lower_bound(weightsSums.begin(), weightsSums.end(), index + 1) - weightsSums.begin();
+        int id = upper_bound(weightsSums.begin(), weightsSums.end(), index) - weightsSums.begin();
         return id;
     }
 };
