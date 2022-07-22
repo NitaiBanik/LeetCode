@@ -4,7 +4,10 @@ public:
         vector<vector<int>> answer;
         int i = 0, j = 0;
         
-        while(i < firstList.size() && j < secondList.size()){
+        int firstListSize = firstList.size();
+        int secondListSize = secondList.size();
+        
+        while(i < firstListSize && j < secondListSize){
             
             int mn = max(secondList[j][0], firstList[i][0]);
             int mx = min(secondList[j][1], firstList[i][1]);
