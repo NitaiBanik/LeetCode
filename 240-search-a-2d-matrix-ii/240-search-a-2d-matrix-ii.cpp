@@ -1,25 +1,15 @@
 class Solution {
 public:
-    int getCol(vector<vector<int>>& matrix, int target){
-        
-        int col = 0;
-        int row = matrix.size()-1;
-        
-        while(col >= 0 && col < matrix[0].size() && row >= 0 && row < matrix.size()){
-            if(matrix[row][col] == target) return true;
-            
-            if(matrix[row][col] > target) row--;
-            else col++;
-        }
-        return false;
-    }
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
-        bool ans = getCol(matrix, target);
+    int i = 0, j = matrix[0].size()-1;
         
-        if(ans) return true;
-        
+    while(i < matrix.size() && j >= 0){
+        if(matrix[i][j] == target) return true;
+        else if(target > matrix[i][j])
+            i++;
+        else j--;
+    }
         return false;
-        
     }
 };
