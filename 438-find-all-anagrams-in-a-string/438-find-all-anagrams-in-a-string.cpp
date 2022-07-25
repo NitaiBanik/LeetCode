@@ -5,8 +5,7 @@ public:
     }
     
     void calculateFrequencyInP(vector<int>& freq1, string& p, int& numberOfDistinctCharInP){
-        for(auto chr: p)
-        {
+        for(auto chr: p){
             if(freq1[chr] == 0)
                 numberOfDistinctCharInP++;
             freq1[chr]++;
@@ -28,8 +27,8 @@ public:
             }
             if(numberOfDistinctCharInS == numberOfDistinctCharInP){
                 positions.push_back(lf);
-                if(freq2[s[lf]] == freq1[s[lf]]) numberOfDistinctCharInS--;
-                freq2[s[lf++]]--;
+              //  if(freq2[s[lf]] == freq1[s[lf]]) numberOfDistinctCharInS--;
+              //  freq2[s[lf++]]--;
             }
         }
         
