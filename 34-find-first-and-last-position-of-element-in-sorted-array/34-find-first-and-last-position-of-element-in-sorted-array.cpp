@@ -1,29 +1,28 @@
 class Solution {
 public:
-    
-    int lower_bound(vector<int>&nums, int target){
-        
-        int beg = 0, end = nums.size() -1;
-        
-        while(beg <= end){
-            int mid = (beg + end) / 2;
+    int find(vector<int>& nums, int target){
+        int lo = 0, hi = nums.size() - 1;
+        while(lo <= hi){
+            int mid = (lo + hi) / 2;
             
-            if(nums[mid] < target) beg = mid + 1;
-            else end = mid - 1;
+            if(nums[mid] < target) lo = mid + 1;
+            else hi = mid - 1;
         }
-        
-        return beg;
+        return lo;
     }
-    
     vector<int> searchRange(vector<int>& nums, int target) {
-        
         if(nums.size() == 0) return {-1, -1};
         
-        int lowerBound = lower_bound(nums, target);
-        if(lowerBound >= nums.size() || nums[lowerBound] != target) return {-1, -1};
+        int pos1 = find(nums, target);
+        cout<<"pos ="<<pos1<<endl;
+        if(pos1 >= nums.size() || nums[pos1] != target) return {-1, -1};
         
-        int upperBound = lower_bound(nums, target + 1) - 1;
-        return {lowerBound, upperBound};
+        if(pos1 == nums.size() - 1)
+            return {pos1, pos1};
         
+        int pos2 = find(nums, target+1) -1;   
+        if(nums[pos2] != target) return {pos1, pos1};
+        
+        return {pos1, pos2};
     }
 };
