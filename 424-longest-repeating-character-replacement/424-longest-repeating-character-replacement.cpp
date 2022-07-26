@@ -1,22 +1,22 @@
 class Solution {
 public:  
     int characterReplacement(string s, int k) {
-        int ans = 0;
-       for(char i = 'A'; i <= 'Z'; i++){
-           
-           int left = 0, right = 0, otherChars = 0;
-           while(left < s.size() && right < s.size()){
-               if(s[right] != i) otherChars++;
-               
-               while(otherChars > k && left < s.size() && left <= right){
-                   if(s[left] != i) otherChars--;
-                   left++;
-               }
-               
-               ans = max(ans, right - left + 1);
-               right++;
-           }  
-       }
+        int ans = 0, lf = 0, mx = 0;
+        int frequency[130];
+        memset(frequency, 0, sizeof(frequency));
+        
+        for(int i = 0; i < s.size() && lf < s.size(); i++){
+            frequency[s[i]]++;
+            
+            mx = max(frequency[s[i]], mx);
+            
+            if((i - lf + 1 - mx) <= k) ans = max(ans, i - lf + 1);
+            else {
+                frequency[s[lf]]--;
+                lf++;
+            }
+        }
+        
         return ans;
     }
 };
