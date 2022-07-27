@@ -29,13 +29,10 @@ public:
         
         else if(leftChild){
             root->right = leftChild;
-            leftChild->left = NULL;
         }
         
         else if(rightChild){
             root->right = rightChild;
-            
-            rightChild->left = NULL;
         }
             
         return root;
