@@ -1,17 +1,16 @@
 class Solution {
 public:
-    void topologicalSort(int node, vector<int> dependencies[],  vector<int>& indegree,  vector<int>& visited, vector<int>& answer, bool& hasCycle){
+    void topologicalSort(int node, vector<int> dependencies[],  vector<int>& indegree,  vector<int>& visited, bool& hasCycle, int& numCourses){
         visited[node] = 1;
-        answer.push_back(node);
+        numCourses--;
         
         for(auto nodes: dependencies[node]){
             indegree[nodes]--;
             if(indegree[nodes] == 0)
-                topologicalSort(nodes, dependencies, indegree, visited, answer, hasCycle);
+                topologicalSort(nodes, dependencies, indegree, visited, hasCycle, numCourses);
             
             
             if(visited[nodes] == 1){
-                cout<<nodes<<endl;
                 hasCycle = true;
                 return;
             }
@@ -28,17 +27,17 @@ public:
             indegree[prerequisite[0]]++;
             dependencies[prerequisite[1]].push_back(prerequisite[0]);
         }
-        
-        vector<int> answer;
+
         bool hasCycle = false;
+        int numOfCourses = numCourses;
         for(int i = 0; i < numCourses; i++){
             if(indegree[i] == 0 && visited[i] == 0){
-                topologicalSort(i, dependencies, indegree, visited, answer, hasCycle);
+                topologicalSort(i, dependencies, indegree, visited, hasCycle, numOfCourses);
                 if(hasCycle) return 0;
             }
         }
         
-        return answer.size() == numCourses;
+        return numOfCourses == 0;
         
     }
 };
