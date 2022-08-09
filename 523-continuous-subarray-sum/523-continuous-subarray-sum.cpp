@@ -1,25 +1,22 @@
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-       map<int, int>mp;
+        unordered_map<int, int> previousReminders;
         
-        mp[0] = -1;
         int sum = 0;
-        
+        previousReminders[0] = -1;
         for(int i = 0; i < nums.size(); i++){
-            sum += nums[i];
-            if(k != 0)sum %= k;
+            sum += nums[i];      
+            if(k!=0)sum %= k;
             
-            if(mp.find(sum) != mp.end()){
-                if(i - mp[sum] > 1){
-                    // cout<<sum<<endl;
-                    return true;
-                }
+            if(previousReminders.find(sum) != previousReminders.end()){
+            if(i - previousReminders[sum] > 1){
+                return true;
+            }
             }
             else
-            mp[sum] = i;
+            previousReminders[sum] = i;
         }
-        
         return false;
     }
 };
