@@ -7,42 +7,16 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
-    map<int, int> level, par;
-    map<int, TreeNode*> valueToNode;
-    void dfs(TreeNode* root, int parent){
-        if(!root) return;
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root->val > p->val && root->val > q->val)
+            return lowestCommonAncestor(root->left, p, q);
         
-        int value = root->val;
-        par[value] = parent;
-        level[value] = level[parent] + 1;
-        
-        valueToNode[root->val] = root;
-        
-        dfs(root->left, root->val);
-        dfs(root->right, root->val);
-    }
-    
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* pp, TreeNode* qq) {
-        
-        int p = pp->val, q = qq->val;
-        
-        level[root->val] = 0;
-       
-        dfs(root, -1);
-        if(level[p] > level[q]) swap(p, q);
-        
-        while(level[p] != level[q]){
-            q = par[q];
-        }
-        
-        if(p == q) return valueToNode[p];
-        
-        while(par[p] != par[q]){
-            p = par[p], q = par[q];
-        }
-        
-        return valueToNode[par[p]];
+        else if(root->val < p->val && root->val < q->val)
+            return lowestCommonAncestor(root->right, p, q);
+     
+        else return root;
     }
 };
