@@ -3,7 +3,7 @@ public:
     int uniqueMorseRepresentations(vector<string>& words) {
         vector<string> codes = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
         
-        map<string, bool> morseCodes;
+        unordered_map<string, bool> morseCodes;
         
         for(auto word: words){
             string temp = "";
