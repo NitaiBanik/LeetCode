@@ -11,19 +11,21 @@
  */
 class Solution {
 public:
-    int count = 0;
-    void visit(TreeNode* node, int mx){
-        if(!node) return;
+    int visit(TreeNode* node, int mx){
+        if(!node) return 0;
         
+        int count = 0;
         count += mx <= node->val;
         mx = max(mx, node->val);
         
-        visit(node->left, mx);
-        visit(node->right, mx);
+        count += visit(node->left, mx);
+        count += visit(node->right, mx);
+        
+        return count;
     }
     
     int goodNodes(TreeNode* root) {
-        visit(root, INT_MIN);
-        return count;
+        return visit(root, INT_MIN);
+        
     }
 };
