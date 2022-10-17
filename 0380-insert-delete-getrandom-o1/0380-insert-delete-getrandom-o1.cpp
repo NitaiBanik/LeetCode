@@ -1,39 +1,46 @@
 class RandomizedSet {
 public:
-    set<int> st;
+    vector<int> values;
+    unordered_map<int, int> valueWithIndex;
     
     RandomizedSet() {
         
     }
     
     bool insert(int val) {
-        auto pos = st.find(val);
-        if(pos != st.end()){
-            return false; 
+        if(valueWithIndex.find(val) != valueWithIndex.end()){
+            return false;
         }
         else{
-            st.insert(val);
+            values.push_back(val);
+            valueWithIndex[val] = values.size() - 1;
+            
             return true;
         }
     }
     
     bool remove(int val) {
-        auto pos = st.find(val);
-        if(pos != st.end()){
-            st.erase(pos);
-            return true; 
+        if(valueWithIndex.find(val) == valueWithIndex.end()){
+            return false;
         }
         else{
-            return false;
+        int last_value = values[values.size() - 1];
+        values.pop_back();
+        
+        int deleted_value_index = valueWithIndex[val];
+        
+        values[deleted_value_index] = last_value;
+        valueWithIndex[last_value] = deleted_value_index;
+        
+        valueWithIndex.erase(val);
+            
+        return true;
+        
         }
     }
     
     int getRandom() {
-        auto pos = st.begin();
-        int sz= st.size();
-        int rnd = rand() % sz;
-        while(rnd--) pos++;
-        return *pos;
+        return values[rand() % values.size()];
     }
 };
 
