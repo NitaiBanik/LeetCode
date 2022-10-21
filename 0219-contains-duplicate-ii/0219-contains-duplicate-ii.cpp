@@ -5,7 +5,7 @@ public:
         
         for(int i = 0; i < nums.size(); i++){
             if(previousPosition.find(nums[i]) != previousPosition.end()){
-                if(abs(previousPosition[nums[i]] - i) <= k) return true;
+                if(i - previousPosition[nums[i]] <= k) return true;
             }
             previousPosition[nums[i]] = i;
         }
