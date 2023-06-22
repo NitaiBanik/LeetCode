@@ -7,7 +7,7 @@ public:
     // agge kini nai pabo free[i-1]
     
     // abr ith e kena beach kichu nao korte pari
-    int maxProfit(vector<int>& prices, int fee) {
+    /*int maxProfit(vector<int>& prices, int fee) {
         vector<int> free(prices.size(), 0), hold(prices.size(), 0);
         
         free[0] = 0;
@@ -19,5 +19,18 @@ public:
         }
 
         return free[prices.size() - 1];
+    }*/
+    
+    int maxProfit(vector<int>& prices, int fee) {
+        int kininai = 0;
+        int kinsi = -prices[0];
+        
+        for(int i = 1; i < prices.size(); i++){
+            int aggeKiniNai = kininai;
+            kininai = max(kininai, kinsi + prices[i] - fee);
+            kinsi = max(kinsi, aggeKiniNai - prices[i]);
+        }
+
+        return kininai;
     }
 };
