@@ -17,7 +17,7 @@ public:
         if(vec.size() == 1) return vec[0] - 1 < 0 ? 0 :  vec[0] - 1;
         
         cn = 0;
-        for(auto x: vec) cout<<x<<endl;
+       // for(auto x: vec) cout<<x<<endl;
           for(int i = 0; i < vec.size(); i++){
               if(vec[i] == 0){
                   int x = i > 0 ? vec[i-1] : 0;
